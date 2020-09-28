@@ -8,7 +8,7 @@ const Student = props => (
         <td>{props.student.age}</td>
         <td>{props.student.email}</td>
         <td>
-            <Link to={ '/edit/' + props.student._id }>edit</Link> |
+            <Link to={ '/students/edit/' + props.student._id }>edit</Link> |
             <button type='button' onClick={() => { props.deleteStudent(props.student._id) }}>delete</button>
         </td>
     </tr>

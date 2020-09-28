@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class EditStudent extends Component {
+class EditLecturer extends Component {
     constructor(props) {
         super(props);
 
@@ -18,7 +18,7 @@ class EditStudent extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:9000/students/' + this.props.match.params.id)
+        axios.get('http://localhost:9000/lecturers/' + this.props.match.params.id)
         .then(response => {
             this.setState({
                 name: response.data.name,
@@ -52,16 +52,16 @@ class EditStudent extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const student = {
+        const lecturer = {
             name: this.state.name,
             age: this.state.age,
             email: this.state.email
         }
 
-        axios.patch('http://localhost:9000/students/' + this.props.match.params.id, student)
+        axios.patch('http://localhost:9000/lecturers/' + this.props.match.params.id, lecturer)
         .then(res => console.log(res.data));
 
-        window.location = '/students';
+        window.location = '/lecturers';
     }
 
     render() { 
@@ -76,4 +76,4 @@ class EditStudent extends Component {
     }
 }
  
-export default EditStudent;
+export default EditLecturer;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class CreateStudent extends Component {
+class CreateLecturer extends Component {
     constructor(props) {
         super(props);
 
@@ -46,17 +46,17 @@ class CreateStudent extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const student = {
+        const lecturer = {
             name: this.state.name,
             age: this.state.age,
             email: this.state.email,
             password: this.state.password
         }
 
-        axios.post('http://localhost:9000/students', student)
+        axios.post('http://localhost:9000/lecturers', lecturer)
         .then(res => console.log(res.data));
 
-        window.location = '/students';
+        window.location = '/lecturers';
     }
 
     render() {
@@ -74,4 +74,4 @@ class CreateStudent extends Component {
     }
 }
 
-export default CreateStudent;
+export default CreateLecturer;

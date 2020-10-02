@@ -9,6 +9,9 @@ import EditStudent from './components/EditStudent.component';
 import LecturerList from './components/LecturerList.component';
 import CreateLecturer from './components/CreateLecturer.component';
 import EditLecturer from './components/EditLecturer.component';
+import SubjectList from './components/SubjectList.component'; 
+import CreateSubject from './components/CreateSubject.component';
+import EditSubject from './components/EditSubject.component';
 
 class App extends React.Component{
   constructor(props){
@@ -36,6 +39,9 @@ class App extends React.Component{
           <Route path='/lecturers' exact component={LecturerList} />
           <Route path='/lecturers/add-lecturer' exact component={CreateLecturer} />
           <Route path='/lecturers/edit/:id' exact component={EditLecturer} />
+          <Route path='/subjects' exact component={SubjectList} />
+          <Route path='/subjects/add-subject' exact component={CreateSubject} />
+          <Route path='/subjects/edit/:id' exact component={EditSubject} />
         </div>
       </Router>
     );

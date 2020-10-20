@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../axios';
 
 class CreateSubject extends Component {
     constructor(props) {
@@ -51,35 +51,22 @@ class CreateSubject extends Component {
 
     onChangeLecture(e) {
         this.setState({
-            credits: {
-                lecture: e.target.value
-            }
+            lecture: e.target.value
         })
     }
 
     onChangePractical(e) {
         this.setState({
-            credits: {
-                practical: e.target.value
-            }
+            practical: e.target.value
         })
     }
 
     onSubmit(e) {
         e.preventDefault();
 
-        const subject = {
-            subjectCode: this.state.subjectCode,
-            name: this.state.name,
-            semester: this.state.semester,
-            isCompulsory: this.state.isCompulsory,
-            credits: {
-                lecture: this.state.credits.lecture,
-                practical: this.state.credits.practical
-            }
-        }
+        const subject = this.state;
 
-        axios.post('http://localhost:9000/subjects', subject)
+        axios.post('/subjects', subject)
         .then(res => console.log(res.data));
 
         window.location = '/subjects';

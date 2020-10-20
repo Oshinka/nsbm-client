@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../axios';
 
 class EditSubject extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class EditSubject extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:9000/subjects/' + this.props.match.params.id)
+        axios.get('/subjects/' + this.props.match.params.id)
         .then(response => {
             this.setState({
                 subjectCode: response.data.subjectCode,
@@ -97,7 +97,7 @@ class EditSubject extends Component {
             }
         }
 
-        axios.patch('http://localhost:9000/subjects/' + this.props.match.params.id, subject)
+        axios.patch('/subjects/' + this.props.match.params.id, subject)
         .then(res => console.log(res.data));
 
         window.location = '/subjects';

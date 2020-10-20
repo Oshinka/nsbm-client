@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios';
+import Navbar from './Navbar.component';
+import SearchBar from './SearchBar.component';
 
 const Subject = props => (
     <tr>
@@ -23,11 +25,15 @@ class SubjectList extends Component {
 
         this.deleteSubject = this.deleteSubject.bind(this);
 
-        this.state = {subjects: []};
+        this.state = {
+            subjects: [],
+            filteredSubject: {},
+            searchField: ''
+        };
     }
 
     componentDidMount() {
-        axios.get('http://localhost:9000/subjects')
+        axios.get('/subjects')
         .then(response => {
             this.setState({ subjects: response.data })
         })
@@ -35,7 +41,7 @@ class SubjectList extends Component {
     }
 
     deleteSubject(id) {
-        axios.delete('http://localhost:9000/subjects/' + id)
+        axios.delete('/subjects/' + id)
         .then(response => { console.log(response.data) });
 
         this.setState({
@@ -43,8 +49,21 @@ class SubjectList extends Component {
         })
     }
 
+    getSubjectBySubjectCode() {
+        axios.get('/subjects?code=' + this.state.searchField)
+        .then(response => {
+            console.log(response.data);
+            // return <Subject subject={response.data} deleteSubject={this.deleteSubject} key={response.data._id} />;
+            this.setState({ filteredSubject: response.data })
+        })
+        .catch((error) => { console.log(error) });
+
+        return <Subject subject={this.state.filteredSubject} deleteSubject={this.deleteSubject} key={this.state.filteredSubject._id} />;
+    }
+
     getSubjectList() {
         return this.state.subjects.map(currentSubject => {
+            console.log(currentSubject);
             return <Subject subject={currentSubject} deleteSubject={this.deleteSubject} key={currentSubject._id} />;
         })
     }
@@ -52,6 +71,18 @@ class SubjectList extends Component {
     render() {
         return (
             <div>
+                <Navbar />
+                <Link to={"/subjects/add-subject"}>+ add subject</Link> 
+                <SearchBar 
+                    placeholder="Enter subject code"
+                    handleChange={(e) => this.setState({searchField: e.target.value})}
+                />
+                <button
+                    type="button"
+                    onClick={() => {
+                        this.getSubjectBySubjectCode()
+                    }}
+                >search</button>
                 <table>
                     <thead>
                         <tr>
@@ -65,6 +96,7 @@ class SubjectList extends Component {
                         </tr>
                     </thead>
                     <tbody>
+                        {/* { this.getSubjectBySubjectCode() } */}
                         { this.getSubjectList() }
                     </tbody>
                 </table>

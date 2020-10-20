@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../axios';
 
 class CreateStudent extends Component {
     constructor(props) {
@@ -53,10 +53,11 @@ class CreateStudent extends Component {
             password: this.state.password
         }
 
-        axios.post('http://localhost:9000/students', student)
-        .then(res => console.log(res.data));
-
-        window.location = '/students';
+        axios.post('/students', student)
+        .then(res => {
+            window.location = '/students/profile/' + res.data.student._id;
+            console.log(res.data);
+        });
     }
 
     render() {

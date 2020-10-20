@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios';
+import Navbar from './Navbar.component'
 
 const Lecturer = props => (
     <tr>
@@ -24,7 +25,7 @@ class LecturerList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:9000/lecturers')
+        axios.get('lecturers')
         .then(response => {
             this.setState({ lecturers: response.data })
         })
@@ -32,7 +33,7 @@ class LecturerList extends Component {
     }
 
     deleteLecturer(id) {
-        axios.delete('http://localhost:9000/lecturers/' + id)
+        axios.delete('/lecturers/' + id)
         .then(response => { console.log(response.data) });
 
         this.setState({
@@ -49,6 +50,8 @@ class LecturerList extends Component {
     render() {
         return (
             <div>
+                <Navbar />
+                <Link to={"/lecturers/add-lecturer"}>+ add lecturer</Link> 
                 <table>
                     <thead>
                         <tr>

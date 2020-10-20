@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import StudentList from './components/StudentList.component';
 import CreateStudent from './components/CreateStudent.component';
 import EditStudent from './components/EditStudent.component';
+import Student from './components/Student.component';
 import LecturerList from './components/LecturerList.component';
 import CreateLecturer from './components/CreateLecturer.component';
 import EditLecturer from './components/EditLecturer.component';
@@ -36,6 +37,7 @@ class App extends React.Component{
           <Route path='/students' exact component={StudentList} />
           <Route path='/students/add-student' exact component={CreateStudent} />
           <Route path='/students/edit/:id' exact component={EditStudent} />
+          <Route path='/students/profile/:id' exact component={Student} />
           <Route path='/lecturers' exact component={LecturerList} />
           <Route path='/lecturers/add-lecturer' exact component={CreateLecturer} />
           <Route path='/lecturers/edit/:id' exact component={EditLecturer} />

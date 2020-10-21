@@ -51,13 +51,13 @@ class CreateSubject extends Component {
 
     onChangeLecture(e) {
         this.setState({
-            lecture: e.target.value
+            credits : {...this.state.credits, lecture:e.target.value}
         })
     }
 
     onChangePractical(e) {
         this.setState({
-            practical: e.target.value
+            credits : {...this.state.credits, practical:e.target.value}
         })
     }
 
@@ -65,6 +65,7 @@ class CreateSubject extends Component {
         e.preventDefault();
 
         const subject = this.state;
+        console.log(subject);
 
         axios.post('/subjects', subject)
         .then(res => console.log(res.data));

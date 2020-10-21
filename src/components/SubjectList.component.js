@@ -10,8 +10,8 @@ const Subject = props => (
         <td>{props.subject.name}</td>
         <td>{props.subject.semester}</td>
         <td>{props.subject.isCompulsory}</td>
-        {/* <td>{props.subject.credits}</td> */}
-        {/* <td>{props.subject.credits.practical}</td> */}
+        <td>{props.subject.credits.lecture}</td>
+        <td>{props.subject.credits.practical}</td>
         <td>
             <Link to={ '/subjects/edit/' + props.subject._id }>edit</Link> |
             <button type='button' onClick={() => { props.deleteSubject(props.subject._id) }}>delete</button>

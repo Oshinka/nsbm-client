@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Swal from 'sweetalert2';
 import axios from "../axios";
 import Navbar from "./Navbar.component";
 
@@ -12,12 +13,28 @@ const Student = (props) => (
     <td>{props.student.age}</td>
     <td>{props.student.email}</td>
     <td>
-      <Link to={"/students/edit/" + props.student._id}><IconButton><EditIcon /></IconButton></Link> |
+      <Link to={"/students/edit/" + props.student._id}><IconButton><EditIcon /></IconButton></Link>
       <IconButton><DeleteIcon
         color="secondary"
         onClick={() => {
-          alert('Are you sure you want to delete this?');
-          props.deleteStudent(props.student._id);
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              props.deleteStudent(props.student._id);
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
         }}
       /></IconButton>
     </td>
@@ -70,15 +87,14 @@ class StudentList extends Component {
     return (
       <div>
         <Navbar />
-        <Link to={"/students/add-student"}>+ add student</Link> 
-        <p>Total number of students <span className='badge badge-pill badge-primary'>{ this.state.students.length }</span></p>
+        <Link to={"/students/add-student"}>+ add student</Link>
+        <p>Total number of students <span className='badge badge-pill badge-primary'>{this.state.students.length}</span></p>
         <table>
           <thead>
             <tr>
               <th>Name</th>
               <th>Age</th>
               <th>Email</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>{this.getStudentList()}</tbody>

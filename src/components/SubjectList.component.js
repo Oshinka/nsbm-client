@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Swal from 'sweetalert2';
 import axios from '../axios';
 import Navbar from './Navbar.component';
 import SearchBar from './SearchBar.component';
@@ -9,18 +13,40 @@ const Subject = props => (
         <td>{props.subject.subjectCode}</td>
         <td>{props.subject.name}</td>
         <td>{props.subject.semester}</td>
-        <td>{props.subject.isCompulsory}</td>
+        <td>{(props.subject.isCompulsory) ? 'X' : 'O'}</td>
         <td>{props.subject.credits.lecture}</td>
         <td>{props.subject.credits.practical}</td>
         <td>
-            <Link to={ '/subjects/edit/' + props.subject._id }>edit</Link> |
-            <button type='button' onClick={() => { props.deleteSubject(props.subject._id) }}>delete</button>
+            <Link to={'/subjects/edit/' + props.subject._id}><IconButton><EditIcon /></IconButton></Link>
+            <IconButton><DeleteIcon
+                color="secondary"
+                onClick={() => {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            props.deleteSubject(props.subject._id);
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+                }}
+            /></IconButton>
         </td>
     </tr>
 )
 
 class SubjectList extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.deleteSubject = this.deleteSubject.bind(this);
@@ -34,15 +60,15 @@ class SubjectList extends Component {
 
     componentDidMount() {
         axios.get('/subjects')
-        .then(response => {
-            this.setState({ subjects: response.data })
-        })
-        .catch((error) => { console.log(error) })
+            .then(response => {
+                this.setState({ subjects: response.data })
+            })
+            .catch((error) => { console.log(error) })
     }
 
     deleteSubject(id) {
         axios.delete('/subjects/' + id)
-        .then(response => { console.log(response.data) });
+            .then(response => { console.log(response.data) });
 
         this.setState({
             subjects: this.state.subjects.filter(el => el._id !== id)
@@ -51,12 +77,12 @@ class SubjectList extends Component {
 
     getSubjectBySubjectCode() {
         axios.get('/subjects?code=' + this.state.searchField)
-        .then(response => {
-            console.log(response.data);
-            // return <Subject subject={response.data} deleteSubject={this.deleteSubject} key={response.data._id} />;
-            this.setState({ filteredSubject: response.data })
-        })
-        .catch((error) => { console.log(error) });
+            .then(response => {
+                console.log(response.data);
+                // return <Subject subject={response.data} deleteSubject={this.deleteSubject} key={response.data._id} />;
+                this.setState({ filteredSubject: response.data })
+            })
+            .catch((error) => { console.log(error) });
 
         return <Subject subject={this.state.filteredSubject} deleteSubject={this.deleteSubject} key={this.state.filteredSubject._id} />;
     }
@@ -72,10 +98,10 @@ class SubjectList extends Component {
         return (
             <div>
                 <Navbar />
-                <Link to={"/subjects/add-subject"}>+ add subject</Link> 
-                <SearchBar 
+                <Link to={"/subjects/add-subject"}>+ add subject</Link>
+                <SearchBar
                     placeholder="Enter subject code"
-                    handleChange={(e) => this.setState({searchField: e.target.value})}
+                    handleChange={(e) => this.setState({ searchField: e.target.value })}
                 />
                 <button
                     type="button"
@@ -92,12 +118,11 @@ class SubjectList extends Component {
                             <th>IsCompulsory</th>
                             <th>Credits for Lecture</th>
                             <th>Credits for Practicle</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* { this.getSubjectBySubjectCode() } */}
-                        { this.getSubjectList() }
+                        {this.getSubjectList()}
                     </tbody>
                 </table>
             </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 import axios from '../axios';
 
 class CreateStudent extends Component {
@@ -55,8 +56,13 @@ class CreateStudent extends Component {
 
         axios.post('/students', student)
         .then(res => {
-            window.location = '/students/profile/' + res.data.student._id;
-            console.log(res.data);
+            Swal.fire(
+                'Hello ' + res.data.student.name,
+                'You clicked the button!',
+                'success'
+              ).then((result) => {
+                window.location = '/students/profile/' + res.data.student._id;
+              })
         });
     }
 

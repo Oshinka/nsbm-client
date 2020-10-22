@@ -69,17 +69,13 @@ class EditSubject extends Component {
 
     onChangeLecture(e) {
         this.setState({
-            credits: {
-                lecture: e.target.value
-            }
+            credits : {...this.state.credits, lecture:e.target.value}
         })
     }
 
     onChangePractical(e) {
         this.setState({
-            credits: {
-                practical: e.target.value
-            }
+            credits : {...this.state.credits, practical:e.target.value}
         })
     }
 

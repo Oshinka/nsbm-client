@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 import axios from '../axios';
 
 class CreateSubject extends Component {
@@ -68,9 +69,16 @@ class CreateSubject extends Component {
         console.log(subject);
 
         axios.post('/subjects', subject)
-        .then(res => console.log(res.data));
-
-        window.location = '/subjects';
+        .then(res => {
+            console.log(res.data.name);
+            Swal.fire(
+                'Hello ' + res.data.name,
+                'You clicked the button!',
+                'success'
+              ).then((result) => {
+                window.location = '/subjects';
+              })
+        });
     }
 
     render() {

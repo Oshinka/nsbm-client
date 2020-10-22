@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 import axios from '../axios';
 
 class CreateLecturer extends Component {
@@ -54,9 +55,15 @@ class CreateLecturer extends Component {
         }
 
         axios.post('/lecturers', lecturer)
-        .then(res => console.log(res.data));
-
-        window.location = '/lecturers';
+        .then(res => {
+            Swal.fire(
+                'Hello ' + res.data.lecturer.name,
+                'You clicked the button!',
+                'success'
+              ).then((result) => {
+                window.location = '/lecturers';
+              })
+        });
     }
 
     render() {

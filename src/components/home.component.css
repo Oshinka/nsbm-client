@@ -1,0 +1,17 @@
+.lecturerCards {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.lecturerCards::-webkit-scrollbar {
+    display: none;
+}
+
+LecturerCard {
+    transition: transform 450ms;
+}
+
+LecturerCard:hover {
+    transform: scale(1.08);
+}

@@ -10,13 +10,17 @@ class CreateLecturer extends Component {
         this.onChangeAge = this.onChangeAge.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangePosition = this.onChangePosition.bind(this);
+        this.onChangeAvatar = this.onChangeAvatar.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             name: '',
             age: 0,
             email: '',
-            password: ''
+            password: '',
+            position: '',
+            avatar: ''
         }
     }
 
@@ -44,6 +48,18 @@ class CreateLecturer extends Component {
         })
     }
 
+    onChangePosition(e) {
+        this.setState({
+            position: e.target.value
+        })
+    }
+
+    onChangeAvatar(e) {
+        this.setState({
+            avatar: e.target.value
+        })
+    }
+
     onSubmit(e) {
         e.preventDefault();
 
@@ -51,14 +67,16 @@ class CreateLecturer extends Component {
             name: this.state.name,
             age: this.state.age,
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
+            position: this.state.position,
+            avatar: this.state.avatar
         }
 
         axios.post('/lecturers', lecturer)
         .then(res => {
             Swal.fire(
                 'Hello ' + res.data.lecturer.name,
-                'You clicked the button!',
+                'Your data has been recorded successfully!',
                 'success'
               ).then((result) => {
                 window.location = '/lecturers';
@@ -74,6 +92,8 @@ class CreateLecturer extends Component {
                     <input type="text" onChange={this.onChangeAge} placeholder='age' />
                     <input type="text" onChange={this.onChangeEmail} placeholder='email' />
                     <input type="text" onChange={this.onChangePassword} placeholder='password' />
+                    <input type="text" onChange={this.onChangePosition} placeholder='position' />
+                    <input type="text" onChange={this.onChangeAvatar} placeholder='paste url of the image' />
                     <input type="submit" />
                 </form>
             </div>

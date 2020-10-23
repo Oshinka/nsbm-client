@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './UseStyles.component';
-import Avatar from '@material-ui/core/Avatar';
+import ImageAvatars from './ImageAvatars.component';
 import axios from '../axios';
 
 class Student extends Component {
@@ -33,7 +33,7 @@ class Student extends Component {
     render() {
         return (
             <div className={classes.root}>
-                <Avatar src={this.state.avatar} alt='avatar' className={classes.large} />
+                <ImageAvatars url={this.state.avatar} />
                 <p>Hello {this.state.name}</p>
             </div>
         );

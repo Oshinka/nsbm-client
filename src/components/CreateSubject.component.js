@@ -73,7 +73,7 @@ class CreateSubject extends Component {
             console.log(res.data.name);
             Swal.fire(
                 'Hello ' + res.data.name,
-                'You clicked the button!',
+                'New Subject is added!',
                 'success'
               ).then((result) => {
                 window.location = '/subjects';

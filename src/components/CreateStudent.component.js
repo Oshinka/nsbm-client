@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import Swal from 'sweetalert2';
 import axios from '../axios';
 
@@ -6,10 +8,6 @@ class CreateStudent extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeName = this.onChangeName.bind(this);
-        this.onChangeAge = this.onChangeAge.bind(this);
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -20,63 +18,41 @@ class CreateStudent extends Component {
         }
     }
 
-    onChangeName(e) {
-        this.setState({
-            name: e.target.value
-        })
-    }
-
-    onChangeAge(e) {
-        this.setState({
-            age: e.target.value
-        })
-    }
-
-    onChangeEmail(e) {
-        this.setState({
-            email: e.target.value
-        })
-    }
-
-    onChangePassword(e) {
-        this.setState({
-            password: e.target.value
-        })
-    }
+    handleChange = input => e => {
+        this.setState({ [input]: e.target.value })
+    };
 
     onSubmit(e) {
         e.preventDefault();
 
-        const student = {
-            name: this.state.name,
-            age: this.state.age,
-            email: this.state.email,
-            password: this.state.password
-        }
+        const student = this.state;
+
+        console.log(student);
 
         axios.post('/students', student)
-        .then(res => {
-            Swal.fire(
-                'Hello ' + res.data.student.name,
-                'You clicked the button!',
-                'success'
-              ).then((result) => {
-                window.location = '/students/profile/' + res.data.student._id;
-              })
-        });
+            .then(res => {
+                console.log(res);
+                Swal.fire(
+                    'Hello ' + res.data.student.name,
+                    'Your record saved successfully!',
+                    'success'
+                ).then((result) => {
+                    window.location = '/students/profile/' + res.data.student._id;
+                })
+            });
     }
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <form onSubmit={this.onSubmit}>
-                    <input type="text" onChange={this.onChangeName} placeholder='name' />
-                    <input type="text" onChange={this.onChangeAge} placeholder='age' />
-                    <input type="text" onChange={this.onChangeEmail} placeholder='email' />
-                    <input type="text" onChange={this.onChangePassword} placeholder='password' />
-                    <input type="submit" />
+                    <TextField id="name" label="name" variant="outlined" onChange={this.handleChange('name')} />
+                    <TextField id="age" label="age" variant="outlined" onChange={this.handleChange('age')} />
+                    <TextField id="email" label="email" variant="outlined" onChange={this.handleChange('email')} />
+                    <TextField id="password" label="password" variant="outlined" onChange={this.handleChange('password')} />
+                    <Button type="submit" variant="contained" size="large" >Submit</Button>
                 </form>
-            </div>
+            </React.Fragment>
         )
     }
 }

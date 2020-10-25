@@ -1,3 +1,8 @@
+.studentCards {
+    display: flex;
+    justify-content: space-between;
+}
+
 .lecturerCards {
     display: flex;
     overflow-y: hidden;

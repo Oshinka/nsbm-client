@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import 'fontsource-roboto';
 import Typography from '@material-ui/core/Typography';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import axios from '../axios';
 import LecturerCard from './LecturerCard.component';
 import StudentCard from './StudentCard.component';
 import './home.component.css'
+import { Button } from '@material-ui/core';
+import Youtube from 'react-youtube';
 
 class Home extends Component {
     constructor(props) {
@@ -13,11 +16,13 @@ class Home extends Component {
         this.state = {
             student: [],
             fullstudent: [],
-            management: []
+            management: [],
+            showtopbutton: false
         }
     }
 
     async componentDidMount() {
+
 
         // Students
         await axios.get('/students/5f7c9961ac8ac64c4172cafa')
@@ -91,6 +96,18 @@ class Home extends Component {
             .then(response => {
                 this.setState({ management: [...this.state.management, response.data] })
             })
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                this.setState({ showtopbutton: true })
+            } else {
+                this.setState({ showtopbutton: false })
+            }
+        });
+
+        return () => {
+            window.removeEventListener('scroll');
+        }
     }
 
     getStudentCards() {
@@ -116,8 +133,20 @@ class Home extends Component {
     }
 
     render() {
+        const { showtopbutton } = this.state;
+
         return (
-            <div>
+            <React.Fragment>
+                <div id='top' />
+                <div className='youtubeVideo'>
+                    <Youtube videoId='oKu4GAeGjp8' />
+                </div>
+                <div className={`buttonTop ${showtopbutton && 'buttonTopShow'}`}>
+                    <Button href='#top'><KeyboardArrowUpIcon
+                        color='primary'
+                        fontSize='large'
+                    /></Button>
+                </div>
                 <Typography variant="h4" gutterBottom>
                     Students
                 </Typography>
@@ -130,7 +159,7 @@ class Home extends Component {
                 <div className='lecturerCards'>
                     {this.getLecturerCards()}
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

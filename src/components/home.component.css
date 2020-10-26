@@ -1,3 +1,27 @@
+.buttonTop {
+    position: fixed;
+    top: 80%;
+    left: 80%;
+    border: 0;
+    z-index: -1;
+    display: none;
+
+    /* Animations */
+    transition-timing-function: ease-in;
+    transition: all 0.5s;
+}
+
+.buttonTopShow {
+    display: unset !important;
+    z-index: 1;
+}
+
+.youtubeVideo {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
 .studentCards {
     display: flex;
     justify-content: space-between;

@@ -30,7 +30,7 @@ const Student = (props) => (
               props.deleteStudent(props.student._id);
               Swal.fire(
                 'Deleted!',
-                'Your file has been deleted.',
+                'The record has been deleted.',
                 'success'
               )
             }

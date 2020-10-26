@@ -40,7 +40,6 @@ class Student extends Component {
                         Swal.fire({
                             imageUrl: this.state.avatar,
                             imageWidth: 400,
-                            imageHeight: 250,
                             imageAlt: 'Student Avatar',
                             showCloseButton: true,
                             showCancelButton: true,

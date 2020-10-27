@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from './components/Home.component';
@@ -34,7 +33,6 @@ class App extends React.Component{
   render() {
     return (
       <Router>
-        <div className='container'>
           <Route path='/' exact component={Home} />
           <Route path='/students' exact component={StudentList} />
           <Route path='/students/add-student' exact component={CreateStudent} />
@@ -46,7 +44,6 @@ class App extends React.Component{
           <Route path='/subjects' exact component={SubjectList} />
           <Route path='/subjects/add-subject' exact component={CreateSubject} />
           <Route path='/subjects/edit/:id' exact component={EditSubject} />
-        </div>
       </Router>
     );
   }

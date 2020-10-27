@@ -1,7 +1,7 @@
 .buttonTop {
     position: fixed;
     top: 80%;
-    left: 80%;
+    left: 85%;
     border: 0;
     z-index: -1;
     display: none;

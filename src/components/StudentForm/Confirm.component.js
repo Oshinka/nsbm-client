@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import { Button, List, ListItem, ListItemText } from '@material-ui/core';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
 import Swal from 'sweetalert2';
 import axios from '../../axios';
+import ImageAvatars from '../ImageAvatars.component';
 
 
 export class Confirm extends Component {
@@ -32,11 +36,20 @@ export class Confirm extends Component {
 
     render() {
         const{
-            values: {name, age, email, password}
+            values: {name, age, email, password, avatar}
         } = this.props;
+        const {steps, activeStep} = this.props
 
         return (
             <React.Fragment>
+                <Stepper activeStep={activeStep} alternativeLabel>
+                    {steps.map((label) => (
+                        <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+                <ImageAvatars url={avatar} />
                 <List>
                     <ListItem>
                         <ListItemText primary='Name' secondary={name} />
@@ -52,8 +65,8 @@ export class Confirm extends Component {
                     </ListItem>
                 </List>
                 <br />
-                <Button variant='contained' onClick={this.back} >Back</Button>
-                <Button color='primary' variant='contained' onClick={this.continue} >Confirm & Submit</Button>
+                <Button variant='contained' size="large" onClick={this.back} >Back</Button>
+                <Button color='primary' variant='contained' size="large" onClick={this.continue} >Confirm & Submit</Button>
             </React.Fragment>
         )
     }

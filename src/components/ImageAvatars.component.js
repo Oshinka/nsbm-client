@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(7),
     height: theme.spacing(7),
   },
+  extralarge: {
+    width: theme.spacing(14),
+    height: theme.spacing(14),
+  },
 }));
 
 export default function ImageAvatars(props) {
@@ -24,7 +28,7 @@ export default function ImageAvatars(props) {
 
   return (
     <div className={classes.root}>
-      <Avatar alt="Remy Sharp" src={props.url} className={classes.large} />
+      <Avatar alt="Remy Sharp" src={props.url} className={classes.extralarge} />
     </div>
   );
 }

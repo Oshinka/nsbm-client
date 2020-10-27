@@ -3,11 +3,13 @@ import 'fontsource-roboto';
 import Typography from '@material-ui/core/Typography';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import axios from '../axios';
+import Container from '@material-ui/core/Container';
 import LecturerCard from './LecturerCard.component';
 import StudentCard from './StudentCard.component';
-import './home.component.css'
+import IconButton from '@material-ui/core/IconButton';
 import { Button } from '@material-ui/core';
 import Youtube from 'react-youtube';
+import './home.component.css'
 
 class Home extends Component {
     constructor(props) {
@@ -137,28 +139,31 @@ class Home extends Component {
 
         return (
             <React.Fragment>
-                <div id='top' />
-                <div className='youtubeVideo'>
-                    <Youtube videoId='oKu4GAeGjp8' />
-                </div>
-                <div className={`buttonTop ${showtopbutton && 'buttonTopShow'}`}>
-                    <Button href='#top'><KeyboardArrowUpIcon
-                        color='primary'
-                        fontSize='large'
-                    /></Button>
-                </div>
-                <Typography variant="h4" gutterBottom>
-                    Students
-                </Typography>
-                <div className='studentCards'>
-                    {this.getStudentCards()}
-                </div>
-                <Typography variant="h4" gutterBottom>
-                    Lecturers
-                </Typography>
-                <div className='lecturerCards'>
-                    {this.getLecturerCards()}
-                </div>
+                <Container>
+                    <div id='top' />
+                    <div className='youtubeVideo'>
+                        <Youtube videoId='oKu4GAeGjp8' />
+                    </div>
+                    <div className={`buttonTop ${showtopbutton && 'buttonTopShow'}`}>
+                        <IconButton color='primary'>
+                            <Button href='#top'><KeyboardArrowUpIcon
+                                fontSize='large'
+                            /></Button>
+                        </IconButton>
+                    </div>
+                    <Typography variant="h4" gutterBottom>
+                        Students
+                    </Typography>
+                    <div className='studentCards'>
+                        {this.getStudentCards()}
+                    </div>
+                    <Typography variant="h4" gutterBottom>
+                        Lecturers
+                    </Typography>
+                    <div className='lecturerCards'>
+                        {this.getLecturerCards()}
+                    </div>
+                </Container>
             </React.Fragment>
         );
     }

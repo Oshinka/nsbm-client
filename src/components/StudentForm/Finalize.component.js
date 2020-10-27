@@ -5,10 +5,15 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 
-export class StudentBasicInfo extends Component {
+export class Finalize extends Component {
     continue = e => {
         e.preventDefault();
         this.props.nextStep();
+    }
+
+    back = e => {
+        e.preventDefault();
+        this.props.prevStep();
     }
 
     render() {
@@ -23,14 +28,19 @@ export class StudentBasicInfo extends Component {
                         </Step>
                     ))}
                 </Stepper>
-                <TextField id="name" label="name" variant="outlined" onChange={handleChange('name')} defaultValue={values.name} />
-                <TextField id="age" label="age" variant="outlined" onChange={handleChange('age')} defaultValue={values.age} />
-                <TextField id="email" label="email" variant="outlined" onChange={handleChange('email')} defaultValue={values.email} />
-                <TextField id="password" label="password" variant="outlined" onChange={handleChange('password')} defaultValue={values.password} />
+                <TextField
+                    id="avatar"
+                    label="avatar"
+                    helperText="Paste image URL here"
+                    variant="outlined"
+                    onChange={handleChange('avatar')}
+                    defaultValue={values.avatar}
+                />
+                <Button variant='contained' size="large" onClick={this.back} >Back</Button>
                 <Button variant="contained" size="large" onClick={this.continue} >Continue</Button>
             </React.Fragment>
         )
     }
 }
 
-export default StudentBasicInfo
+export default Finalize

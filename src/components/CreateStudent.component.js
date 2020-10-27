@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import StudentBasicInfo from './StudentForm/StudentBasicInfo.component';
+import Container from '@material-ui/core/Container';
 import Confirm from './StudentForm/Confirm.component';
+import Finalize from './StudentForm/Finalize.component';
 import Swal from 'sweetalert2';
 import axios from '../axios';
 
@@ -15,7 +17,8 @@ class CreateStudent extends Component {
             name: '',
             age: 0,
             email: '',
-            password: ''
+            password: '',
+            avatar: ''
         }
     }
 
@@ -59,34 +62,47 @@ class CreateStudent extends Component {
 
     render() {
         const { step } = this.state;
-        const { name, age, email, password } = this.state;
-        const values = { name, age, email, password };
+        const { name, age, email, password, avatar } = this.state;
+        const values = { name, age, email, password, avatar };
+        const steps = ['Basic Information', 'Finalize', 'Confirmation'];
 
         switch (step) {
             case 1:
                 return (
-                    // <React.Fragment>
-                    //     <form onSubmit={this.onSubmit}>
-                    //         <TextField id="name" label="name" variant="outlined" onChange={this.handleChange('name')} />
-                    //         <TextField id="age" label="age" variant="outlined" onChange={this.handleChange('age')} />
-                    //         <TextField id="email" label="email" variant="outlined" onChange={this.handleChange('email')} />
-                    //         <TextField id="password" label="password" variant="outlined" onChange={this.handleChange('password')} />
-                    //         <Button type="submit" variant="contained" size="large" >Submit</Button>
-                    //     </form>
-                    // </React.Fragment>
-                    <StudentBasicInfo
-                        nextStep={this.nextStep}
-                        handleChange={this.handleChange}
-                        values={values}
-                    />
+                    <Container>
+                        <StudentBasicInfo
+                            nextStep={this.nextStep}
+                            handleChange={this.handleChange}
+                            values={values}
+                            steps={steps}
+                            activeStep={0}
+                        />
+                    </Container>
                 )
             case 2:
                 return (
-                    <Confirm
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        values={values}
-                    />
+                    <Container>
+                        <Finalize
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            handleChange={this.handleChange}
+                            values={values}
+                            steps={steps}
+                            activeStep={1}
+                        />
+                    </Container>
+                )
+            case 3:
+                return (
+                    <Container>
+                        <Confirm
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            values={values}
+                            steps={steps}
+                            activeStep={2}
+                        />
+                    </Container>
                 )
             default:
                 console.log('This is multi-step from to add a new student');

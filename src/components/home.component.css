@@ -1,3 +1,9 @@
+.loadingIcon {
+    display: flex;
+    justify-content: center;
+    margin-top: 140px;
+}
+
 .buttonTop {
     position: fixed;
     top: 80%;

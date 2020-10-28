@@ -10,29 +10,30 @@ import Student from './components/Student.component';
 import LecturerList from './components/LecturerList.component';
 import CreateLecturer from './components/CreateLecturer.component';
 import EditLecturer from './components/EditLecturer.component';
-import SubjectList from './components/SubjectList.component'; 
+import SubjectList from './components/SubjectList.component';
 import CreateSubject from './components/CreateSubject.component';
 import EditSubject from './components/EditSubject.component';
 
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={apiResponse:""};
+    this.state = { apiResponse: "" };
   }
 
-  callAPI(){
+  callAPI() {
     fetch("http://localhost:9000/students")
-    .then(res => res.text())
-    .then(res => this.setState({apiResponse: res}));
+      .then(res => res.text())
+      .then(res => this.setState({ apiResponse: res }));
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.callAPI();
   }
 
   render() {
     return (
-      <Router>
+      <div className='app'>
+        <Router>
           <Route path='/' exact component={Home} />
           <Route path='/students' exact component={StudentList} />
           <Route path='/students/add-student' exact component={CreateStudent} />
@@ -44,7 +45,8 @@ class App extends React.Component{
           <Route path='/subjects' exact component={SubjectList} />
           <Route path='/subjects/add-subject' exact component={CreateSubject} />
           <Route path='/subjects/edit/:id' exact component={EditSubject} />
-      </Router>
+        </Router>
+      </div>
     );
   }
 }

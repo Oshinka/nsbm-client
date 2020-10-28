@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'fontsource-roboto';
 import Typography from '@material-ui/core/Typography';
+import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import axios from '../axios';
 import Container from '@material-ui/core/Container';
@@ -9,6 +10,7 @@ import StudentCard from './StudentCard.component';
 import IconButton from '@material-ui/core/IconButton';
 import { Button } from '@material-ui/core';
 import Youtube from 'react-youtube';
+import LeftBar from './LeftBar.component';
 import './home.component.css'
 
 class Home extends Component {
@@ -19,12 +21,13 @@ class Home extends Component {
             student: [],
             fullstudent: [],
             management: [],
-            showtopbutton: false
+            showtopbutton: false,
+            isloading: false
         }
     }
 
     async componentDidMount() {
-
+        this.setState({ isloading: true })
 
         // Students
         await axios.get('/students/5f7c9961ac8ac64c4172cafa')
@@ -99,6 +102,8 @@ class Home extends Component {
                 this.setState({ management: [...this.state.management, response.data] })
             })
 
+        this.setState({ isloading: false })
+
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
                 this.setState({ showtopbutton: true })
@@ -137,8 +142,18 @@ class Home extends Component {
     render() {
         const { showtopbutton } = this.state;
 
+        if (this.state.isloading)
+            return (
+                <Container>
+                    <div className='loadingIcon'>
+                        <img src='https://loading.io/mod/spinner/camera/index.svg' alt='loading...' />
+                    </div>
+                </Container>
+            )
+
         return (
             <React.Fragment>
+                <LeftBar />
                 <Container>
                     <div id='top' />
                     <div className='youtubeVideo'>
@@ -146,9 +161,13 @@ class Home extends Component {
                     </div>
                     <div className={`buttonTop ${showtopbutton && 'buttonTopShow'}`}>
                         <IconButton color='primary'>
-                            <Button href='#top'><KeyboardArrowUpIcon
-                                fontSize='large'
-                            /></Button>
+                            <Button href='#top'>
+                                <Fab color="primary" size="large" aria-label="scroll back to top">
+                                    <KeyboardArrowUpIcon
+                                        fontSize='large'
+                                    />
+                                </Fab>
+                            </Button>
                         </IconButton>
                     </div>
                     <Typography variant="h4" gutterBottom>

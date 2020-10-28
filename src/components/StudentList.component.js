@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Container from '@material-ui/core/Container';
+import Pagination from '@material-ui/lab/Pagination';
 import Swal from 'sweetalert2';
 import axios from "../axios";
 import Navbar from "./Navbar.component";
@@ -47,10 +49,17 @@ class StudentList extends Component {
 
     this.deleteStudent = this.deleteStudent.bind(this);
 
-    this.state = { students: [] };
+    this.state = {
+      students: [],
+      currentPage: 1,
+      studentsPerPage: 10,
+      isloading: false
+    };
   }
 
   componentDidMount() {
+    this.setState({ isloading: true });
+
     axios
       .get('/students')
       .then((response) => {
@@ -59,6 +68,8 @@ class StudentList extends Component {
       .catch((error) => {
         console.log(error);
       });
+
+    this.setState({ isloading: false });
   }
 
   deleteStudent(id) {
@@ -72,7 +83,11 @@ class StudentList extends Component {
   }
 
   getStudentList() {
-    return this.state.students.map((currentStudent) => {
+    const indexOfLastStudent = this.state.currentPage * this.state.studentsPerPage;
+    const indexOfFirstStudent = indexOfLastStudent - this.state.studentsPerPage;
+    const paginateStudents = this.state.students.slice(indexOfFirstStudent, indexOfLastStudent);
+
+    return paginateStudents.map((currentStudent) => {
       return (
         <Student
           student={currentStudent}
@@ -85,21 +100,29 @@ class StudentList extends Component {
 
   render() {
     return (
-      <div>
-        <Navbar />
-        <Link to={"/students/add-student"}>+ add student</Link>
-        <p>Total number of students <span className='badge badge-pill badge-primary'>{this.state.students.length}</span></p>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>{this.getStudentList()}</tbody>
-        </table>
-      </div>
+      <React.Fragment>
+        <Container>
+          <Navbar />
+          <Link to={"/students/add-student"}>+ add student</Link>
+          <p>Total number of students <span className='badge badge-pill badge-primary'>{this.state.students.length}</span></p>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>{(this.state.isloading) ? <img src='https://loading.io/mod/spinner/camera/index.svg' alt='loading...' /> : this.getStudentList()}</tbody>
+          </table>
+          <Pagination
+            count={Math.ceil(this.state.students.length / this.state.studentsPerPage)}
+            onChange={(event, page)=>{this.setState({ currentPage: page})}}
+            page={this.state.currentPage}
+            color="primary"
+          />
+        </Container>
+      </React.Fragment>
     );
   }
 }

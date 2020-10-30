@@ -13,6 +13,7 @@ export class StudentBasicInfo extends Component {
 
     render() {
         const { steps, activeStep, values, handleChange } = this.props;
+        const { firstName, lastName, dateOfBirth, email } = values;
 
         return (
             <React.Fragment>
@@ -23,10 +24,36 @@ export class StudentBasicInfo extends Component {
                         </Step>
                     ))}
                 </Stepper>
-                <TextField id="name" label="name" variant="outlined" onChange={handleChange('name')} defaultValue={values.name} />
-                <TextField id="age" label="age" variant="outlined" onChange={handleChange('age')} defaultValue={values.age} />
-                <TextField id="email" label="email" variant="outlined" onChange={handleChange('email')} defaultValue={values.email} />
-                <TextField id="password" label="password" variant="outlined" onChange={handleChange('password')} defaultValue={values.password} />
+                <TextField
+                    id="firstName"
+                    label="First Name"
+                    variant="outlined"
+                    onChange={handleChange('firstName')}
+                    defaultValue={firstName}
+                />
+                <TextField
+                    id="lastName"
+                    label="Last Name"
+                    variant="outlined"
+                    onChange={handleChange('lastName')}
+                    defaultValue={lastName}
+                />
+                <TextField
+                    id="dateOfBirth"
+                    label="Birthday"
+                    variant="outlined"
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    onChange={handleChange('dateOfBirth')}
+                    defaultValue={dateOfBirth}
+                />
+                <TextField
+                    id="email"
+                    label="email"
+                    variant="outlined"
+                    onChange={handleChange('email')}
+                    defaultValue={email}
+                />
                 <Button variant="contained" size="large" onClick={this.continue} >Continue</Button>
             </React.Fragment>
         )

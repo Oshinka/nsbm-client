@@ -10,6 +10,7 @@ import StudentCard from './StudentCard.component';
 import IconButton from '@material-ui/core/IconButton';
 import { Button } from '@material-ui/core';
 import Youtube from 'react-youtube';
+import AppBar from './AppBar.component';
 import LeftBar from './LeftBar.component';
 import './home.component.css'
 
@@ -153,6 +154,7 @@ class Home extends Component {
 
         return (
             <React.Fragment>
+                <AppBar />
                 <LeftBar />
                 <Container>
                     <div id='top' />

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import LeftBar from './LeftBar.component';
+import Container from '@material-ui/core/Container';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import PersonAddTwoToneIcon from '@material-ui/icons/PersonAddTwoTone';
 import Swal from 'sweetalert2';
 import axios from '../axios';
-import Navbar from './Navbar.component'
 
 const Lecturer = props => (
     <tr>
@@ -75,22 +77,24 @@ class LecturerList extends Component {
 
     render() {
         return (
-            <div>
-                <Navbar />
-                <Link to={"/lecturers/add-lecturer"}>+ add lecturer</Link>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.getLecturerList()}
-                    </tbody>
-                </table>
-            </div>
+            <React.Fragment>
+                <LeftBar Icon={PersonAddTwoToneIcon} link='lecturers/add-lecturer' name='Add Lecturer' />
+                <Container>
+                    <Link to={'/lecturers/add-lecturer'}>+ add lecturer</Link>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.getLecturerList()}
+                        </tbody>
+                    </table>
+                </Container>
+            </React.Fragment>
         );
     }
 }

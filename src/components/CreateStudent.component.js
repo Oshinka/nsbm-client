@@ -14,8 +14,9 @@ class CreateStudent extends Component {
 
         this.state = {
             step: 1,
-            name: '',
-            age: 0,
+            firstName: '',
+            lastName: '',
+            dateOfBirth: null,
             email: '',
             password: '',
             avatar: ''
@@ -62,8 +63,8 @@ class CreateStudent extends Component {
 
     render() {
         const { step } = this.state;
-        const { name, age, email, password, avatar } = this.state;
-        const values = { name, age, email, password, avatar };
+        const { firstName, lastName, dateOfBirth, email, password, avatar } = this.state;
+        const values = { firstName, lastName, dateOfBirth, email, password, avatar };
         const steps = ['Basic Information', 'Finalize', 'Confirmation'];
 
         switch (step) {

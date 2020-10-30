@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -8,12 +8,12 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import HomeIcon from '@material-ui/icons/Home';
 import IconButton from '@material-ui/core/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SubjectIcon from '@material-ui/icons/Subject';
+// import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 const useStyles = makeStyles({
     list: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function TemporaryDrawer() {
+export default function TemporaryDrawer({ Icon, link, name }) {
     const classes = useStyles();
     const [state, setState] = React.useState({
         top: false,
@@ -55,29 +55,41 @@ export default function TemporaryDrawer() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                <Link to='/students'>
+                <NavLink to='/' style={{ textDecorationLine: 'none' }} >
+                    <ListItem button>
+                        <ListItemIcon><IconButton><HomeIcon /></IconButton></ListItemIcon>
+                        <ListItemText primary='Home' />
+                    </ListItem>
+                </NavLink>
+                <NavLink to='/students' style={{ textDecorationLine: 'none' }} >
                     <ListItem button>
                         <ListItemIcon><IconButton><PersonIcon /></IconButton></ListItemIcon>
                         <ListItemText primary='Students' />
                     </ListItem>
-                </Link>
-                <ListItem button>
-                    <ListItemIcon><IconButton href='/students'><AccountBoxIcon /></IconButton></ListItemIcon>
-                    <ListItemText primary='Lecture' />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon><IconButton href='/students'><SubjectIcon /></IconButton></ListItemIcon>
-                    <ListItemText primary='Subjects' />
-                </ListItem>
+                </NavLink>
+                <NavLink to='/lecturers' style={{ textDecorationLine: 'none' }} >
+                    <ListItem button>
+                        <ListItemIcon><IconButton><AccountBoxIcon /></IconButton></ListItemIcon>
+                        <ListItemText primary='Lectures' />
+                    </ListItem>
+                </NavLink>
+                <NavLink to='/subjects' style={{ textDecorationLine: 'none' }} >
+                    <ListItem button>
+                        <ListItemIcon><IconButton><SubjectIcon /></IconButton></ListItemIcon>
+                        <ListItemText primary='Subjects' />
+                    </ListItem>
+                </NavLink>
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+                {(link) ?
+                    <NavLink to={link} style={{ textDecorationLine: 'none' }} >
+                        <ListItem button>
+                            <ListItemIcon><IconButton><Icon /></IconButton></ListItemIcon>
+                            <ListItemText primary={name} />
+                        </ListItem>
+                    </NavLink>
+                    : ''}
             </List>
         </div>
     );

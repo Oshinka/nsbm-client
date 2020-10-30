@@ -10,7 +10,7 @@ class Student extends Component {
         super(props);
 
         this.state = {
-            name: '',
+            firstName: '',
             age: 0,
             email: '',
             avatar: ''
@@ -21,7 +21,7 @@ class Student extends Component {
         axios.get('/students/' + this.props.match.params.id)
             .then(response => {
                 this.setState({
-                    name: response.data.name,
+                    firstName: response.data.firstName,
                     age: response.data.age,
                     email: response.data.email,
                     avatar: response.data.avatar
@@ -72,7 +72,7 @@ class Student extends Component {
                     <ImageAvatars url={this.state.avatar} />
                 </Button>
 
-                <p>Hello {this.state.name}</p>
+                <p>Hello {this.state.firstName}</p>
             </div>
         );
     }

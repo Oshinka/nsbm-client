@@ -12,14 +12,14 @@
     z-index: -1;
     display: none;
 
-    /* Animations */
-    transition-timing-function: ease-in;
-    transition: all 0.5s;
 }
 
 .buttonTopShow {
     display: unset !important;
     z-index: 1;
+    /* Animations */
+    transition-timing-function: ease-in;
+    transition: all 0.5s;
 }
 
 .youtubeVideo {

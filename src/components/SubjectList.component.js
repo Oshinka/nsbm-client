@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import LeftBar from './LeftBar.component';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import Swal from 'sweetalert2';
 import Container from '@material-ui/core/Container';
 import axios from '../axios';
-import Navbar from './Navbar.component';
 import SearchBar from './SearchBar.component';
 
 const Subject = props => (
@@ -95,9 +96,9 @@ class SubjectList extends Component {
     render() {
         return (
             <React.Fragment>
+                <LeftBar Icon={PlaylistAddIcon} link='/subjects/add-subject' name='Add Subject' />
                 <Container>
-                    <Navbar />
-                    <Link to={"/subjects/add-subject"}>+ add subject</Link>
+                    <Link to={'/subjects/add-subject'}>+ add subject</Link>
                     <SearchBar
                         placeholder="Enter subject code"
                         handleChange={(e) => this.setState({ searchField: e.target.value })}

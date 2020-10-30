@@ -20,7 +20,7 @@ export class Confirm extends Component {
             .then(res => {
                 console.log(res);
                 Swal.fire(
-                    'Hello ' + res.data.student.name,
+                    'Hello ' + res.data.student.firstName,
                     'Your record saved successfully!',
                     'success'
                 ).then((result) => {
@@ -36,7 +36,7 @@ export class Confirm extends Component {
 
     render() {
         const{
-            values: {name, age, email, password, avatar}
+            values: {firstName, lastName, dateOfBirth, email, password, avatar}
         } = this.props;
         const {steps, activeStep} = this.props
 
@@ -52,10 +52,13 @@ export class Confirm extends Component {
                 <ImageAvatars url={avatar} />
                 <List>
                     <ListItem>
-                        <ListItemText primary='Name' secondary={name} />
+                        <ListItemText primary='First Name' secondary={firstName} />
                     </ListItem>
                     <ListItem>
-                        <ListItemText primary='Age' secondary={age} />
+                        <ListItemText primary='Last Name' secondary={lastName} />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText primary='Birthday' secondary={dateOfBirth} />
                     </ListItem>
                     <ListItem>
                         <ListItemText primary='Email' secondary={email} />

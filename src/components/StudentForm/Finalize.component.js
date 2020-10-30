@@ -18,6 +18,7 @@ export class Finalize extends Component {
 
     render() {
         const { steps, activeStep, values, handleChange } = this.props;
+        const { avatar, password } = values;
 
         return (
             <React.Fragment>
@@ -34,7 +35,14 @@ export class Finalize extends Component {
                     helperText="Paste image URL here"
                     variant="outlined"
                     onChange={handleChange('avatar')}
-                    defaultValue={values.avatar}
+                    defaultValue={avatar}
+                />
+                <TextField
+                    id="password"
+                    label="password"
+                    variant="outlined"
+                    onChange={handleChange('password')}
+                    defaultValue={password}
                 />
                 <Button variant='contained' size="large" onClick={this.back} >Back</Button>
                 <Button variant="contained" size="large" onClick={this.continue} >Continue</Button>

@@ -1,21 +1,25 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import LeftBar from './LeftBar.component';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Container from '@material-ui/core/Container';
 import Pagination from '@material-ui/lab/Pagination';
+import { AgeFromDateString } from 'age-calculator'
 import Swal from 'sweetalert2';
 import axios from "../axios";
-import Navbar from "./Navbar.component";
 
-const Student = (props) => (
+const Student = ({ student, deleteStudent, key }) => (
   <tr>
-    <td><Link to={"/students/profile/" + props.student._id}>{props.student.name}</Link></td>
-    <td>{props.student.age}</td>
-    <td>{props.student.email}</td>
+    <td><Link to={"/students/profile/" + student._id}>
+      {student.lastName ? `${student.firstName} ${student.lastName}` : `${student.firstName}`}
+    </Link></td>
+    <td>{ new AgeFromDateString(student.dateOfBirth).age }</td>
+    <td>{student.email}</td>
     <td>
-      <Link to={"/students/edit/" + props.student._id}><IconButton><EditIcon /></IconButton></Link>
+      <Link to={"/students/edit/" + student._id}><IconButton><EditIcon /></IconButton></Link>
       <IconButton><DeleteIcon
         color="secondary"
         onClick={() => {
@@ -29,7 +33,7 @@ const Student = (props) => (
             confirmButtonText: 'Yes, delete it!'
           }).then((result) => {
             if (result.isConfirmed) {
-              props.deleteStudent(props.student._id);
+              deleteStudent(student._id);
               Swal.fire(
                 'Deleted!',
                 'The record has been deleted.',
@@ -101,8 +105,8 @@ class StudentList extends Component {
   render() {
     return (
       <React.Fragment>
+        <LeftBar Icon={PersonAddIcon} link='/students/add-student' name='Add Student' />
         <Container>
-          <Navbar />
           <Link to={"/students/add-student"}>+ add student</Link>
           <p>Total number of students <span className='badge badge-pill badge-primary'>{this.state.students.length}</span></p>
           <table>
@@ -115,12 +119,14 @@ class StudentList extends Component {
             </thead>
             <tbody>{(this.state.isloading) ? <img src='https://loading.io/mod/spinner/camera/index.svg' alt='loading...' /> : this.getStudentList()}</tbody>
           </table>
-          <Pagination
-            count={Math.ceil(this.state.students.length / this.state.studentsPerPage)}
-            onChange={(event, page)=>{this.setState({ currentPage: page})}}
-            page={this.state.currentPage}
-            color="primary"
-          />
+          {(this.state.students.length > this.state.studentsPerPage) ?
+            <Pagination
+              count={Math.ceil(this.state.students.length / this.state.studentsPerPage)}
+              onChange={(event, page) => { this.setState({ currentPage: page }) }}
+              page={this.state.currentPage}
+              color="primary"
+            />
+            : ''}
         </Container>
       </React.Fragment>
     );

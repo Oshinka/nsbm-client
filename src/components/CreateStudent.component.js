@@ -3,6 +3,7 @@ import StudentBasicInfo from './StudentForm/StudentBasicInfo.component';
 import Container from '@material-ui/core/Container';
 import Confirm from './StudentForm/Confirm.component';
 import Finalize from './StudentForm/Finalize.component';
+import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
 import axios from '../axios';
 
@@ -16,9 +17,15 @@ class CreateStudent extends Component {
             step: 1,
             firstName: '',
             lastName: '',
+            gender: '',
             dateOfBirth: null,
             email: '',
+            contact: {
+                mobile: '',
+                fixed: '',
+            },
             password: '',
+            showPassword: false,
             avatar: ''
         }
     }
@@ -38,7 +45,14 @@ class CreateStudent extends Component {
     };
 
     handleChange = input => e => {
+        if(input === 'mobile' || input === 'fixed')
+            this.setState({ contact: { ...this.state.contact, [input]: e.target.value } })
         this.setState({ [input]: e.target.value })
+    };
+
+    handleClickShowPassword = () => {
+        const { showPassword } = this.state;
+        this.setState({showPassword: !showPassword})
     };
 
     onSubmit(e) {
@@ -63,14 +77,19 @@ class CreateStudent extends Component {
 
     render() {
         const { step } = this.state;
-        const { firstName, lastName, dateOfBirth, email, password, avatar } = this.state;
-        const values = { firstName, lastName, dateOfBirth, email, password, avatar };
+        const { firstName, lastName, gender, dateOfBirth, email, contact, password, showPassword, avatar } = this.state;
+        const { mobile, fixed } = contact;
+        const values = { firstName, lastName, gender, dateOfBirth, email, mobile, fixed, password, showPassword, avatar };
+        const student = { firstName, lastName, gender, dateOfBirth, email, contact, password, avatar };
         const steps = ['Basic Information', 'Finalize', 'Confirmation'];
 
         switch (step) {
             case 1:
                 return (
                     <Container>
+                        <Typography variant='h2' color='textPrimary' align='center' gutterBottom>
+                            Student Registration
+                        </Typography>
                         <StudentBasicInfo
                             nextStep={this.nextStep}
                             handleChange={this.handleChange}
@@ -83,10 +102,14 @@ class CreateStudent extends Component {
             case 2:
                 return (
                     <Container>
+                        <Typography variant='h2' color='textPrimary' align='center' gutterBottom>
+                            Student Registration
+                        </Typography>
                         <Finalize
                             nextStep={this.nextStep}
                             prevStep={this.prevStep}
                             handleChange={this.handleChange}
+                            handleClickShowPassword={this.handleClickShowPassword}
                             values={values}
                             steps={steps}
                             activeStep={1}
@@ -96,10 +119,14 @@ class CreateStudent extends Component {
             case 3:
                 return (
                     <Container>
+                        <Typography variant='h2' color='textPrimary' align='center' gutterBottom>
+                            Student Registration
+                        </Typography>
                         <Confirm
                             nextStep={this.nextStep}
                             prevStep={this.prevStep}
                             values={values}
+                            student={student}
                             steps={steps}
                             activeStep={2}
                         />

@@ -1,0 +1,5 @@
+.MuiFormControl-root {
+    margin: 20px 60px !important;
+    width: 400px;
+    min-width: 250px !important;
+}

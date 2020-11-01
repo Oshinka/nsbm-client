@@ -11,15 +11,24 @@
     border: 0;
     z-index: -1;
     display: none;
+    /* Animations */
+    transition-timing-function: ease-in;
+    transition: all 0.5s;
 
 }
 
 .buttonTopShow {
     display: unset !important;
     z-index: 1;
-    /* Animations */
-    transition-timing-function: ease-in;
-    transition: all 0.5s;
+}
+
+.buttonTopShow:hover {
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.2) !important;
+}
+
+.darkMode{
+    background-color: black;
 }
 
 .youtubeVideo {
@@ -31,6 +40,7 @@
 .studentCards {
     display: flex;
     justify-content: space-between;
+    margin: 10px;
 }
 
 .lecturerCards {

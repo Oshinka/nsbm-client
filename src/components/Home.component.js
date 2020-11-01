@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'fontsource-roboto';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -23,7 +22,8 @@ class Home extends Component {
             fullstudent: [],
             management: [],
             showtopbutton: false,
-            isloading: false
+            isloading: false,
+            isDark: true
         }
     }
 
@@ -141,7 +141,7 @@ class Home extends Component {
     }
 
     render() {
-        const { showtopbutton } = this.state;
+        const { showtopbutton, isDark } = this.state;
 
         if (this.state.isloading)
             return (
@@ -154,9 +154,9 @@ class Home extends Component {
 
         return (
             <React.Fragment>
-                <AppBar />
+                <AppBar isDark={isDark} />
                 <LeftBar />
-                <Container>
+                <Container className={`${isDark && 'darkMode'}`}>
                     <div id='top' />
                     <div className='youtubeVideo'>
                         <Youtube videoId='oKu4GAeGjp8' />

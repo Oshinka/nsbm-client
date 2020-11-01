@@ -6,13 +6,15 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Swal from 'sweetalert2';
 import axios from '../../axios';
 import ImageAvatars from '../ImageAvatars.component';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
 
 export class Confirm extends Component {
     continue = e => {
         e.preventDefault();
 
-        const student = this.props.values;
+        const student = this.props.student;
 
         console.log(student);
 
@@ -35,10 +37,10 @@ export class Confirm extends Component {
     }
 
     render() {
-        const{
-            values: {firstName, lastName, dateOfBirth, email, password, avatar}
+        const {
+            values: { firstName, lastName, gender, dateOfBirth, email, mobile, fixed, password, avatar }
         } = this.props;
-        const {steps, activeStep} = this.props
+        const { steps, activeStep } = this.props
 
         return (
             <React.Fragment>
@@ -49,13 +51,19 @@ export class Confirm extends Component {
                         </Step>
                     ))}
                 </Stepper>
+                <Typography variant='h4' color='textSecondary'>
+                    Step 3 : Confirmation
+                </Typography>
+                <hr style={{ marginRight: 500, marginBottom: 20 }} />
                 <ImageAvatars url={avatar} />
                 <List>
                     <ListItem>
+                        {/* <ListItemText primary='Full Name' secondary={lastName ? `${firstName} ${lastName}` : `${firstName}`} /> */}
                         <ListItemText primary='First Name' secondary={firstName} />
+                        <ListItemText primary='Last Name' secondary={lastName} />
                     </ListItem>
                     <ListItem>
-                        <ListItemText primary='Last Name' secondary={lastName} />
+                        <ListItemText primary='Gender' secondary={gender} />
                     </ListItem>
                     <ListItem>
                         <ListItemText primary='Birthday' secondary={dateOfBirth} />
@@ -66,10 +74,16 @@ export class Confirm extends Component {
                     <ListItem>
                         <ListItemText primary='Password' secondary={password} />
                     </ListItem>
+                    <ListItem>
+                        <ListItemText primary='Mobile' secondary={mobile} />
+                        <ListItemText primary='Fixed' secondary={fixed} />
+                    </ListItem>
                 </List>
                 <br />
-                <Button variant='contained' size="large" onClick={this.back} >Back</Button>
-                <Button color='primary' variant='contained' size="large" onClick={this.continue} >Confirm & Submit</Button>
+                <Grid container justify='flex-end'>
+                    <Button variant='contained' size="large" onClick={this.back} >Back</Button>
+                    <Button color='primary' variant='contained' size="large" onClick={this.continue} >Confirm & Submit</Button>
+                </Grid>
             </React.Fragment>
         )
     }

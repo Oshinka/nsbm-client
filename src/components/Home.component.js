@@ -23,7 +23,7 @@ class Home extends Component {
             management: [],
             showtopbutton: false,
             isloading: false,
-            isDark: true
+            isDark: false
         }
     }
 
@@ -46,31 +46,43 @@ class Home extends Component {
                 this.setState({ student: [...this.state.student, response.data] })
             })
 
-        this.setState({
-            student: [...this.state.student, {
-                ...this.state.student[0],
+        const studentReviews = [
+            {
+                id: 0,
                 position: 'President of Student Union',
                 comment: 'Absolutely outstanding. I came back to study with the OU almost 20 years after dropping out of a traditional university. I suffer from mental health issues, but the support I have had from the OU has meant that is not been an issue at all.'
-            }]
-        })
-        this.setState({
-            student: [...this.state.student, {
-                ...this.state.student[1],
+            },
+            {
+                id: 1,
                 position: '4th Year Undergraduate Student',
                 comment: 'Very satisfied with the university. Great courses and content. Quality materials in each module that are explained and covered well. Access to online libraries, even though some articles and materials are not available for free in full.'
-            }]
-        })
-        this.setState({
-            student: [...this.state.student, {
-                ...this.state.student[2],
+            },
+            {
+                id: 3,
                 position: '1th Year Undergraduate Student',
                 comment: 'I love it. it is flexible. you can work alongside your study. you can study anytime you want during the day or even the night do you can adjust your study time around your work shift etc.'
-            }]
+            }
+        ]
+
+        studentReviews.map((review) => {
+            return (
+                this.setState({
+                    student: [...this.state.student, {
+                        ...this.state.student[review.id],
+                        position: review.position,
+                        comment: review.comment
+                    }]
+                })
+            )
         })
 
-        this.setState({ fullstudent: [...this.state.fullstudent, this.state.student[3]] })
-        this.setState({ fullstudent: [...this.state.fullstudent, this.state.student[4]] })
-        this.setState({ fullstudent: [...this.state.fullstudent, this.state.student[5]] })
+        const studentIndexes = [3, 4, 5];
+
+        studentIndexes.map((studentIndex) => {
+            return (
+                this.setState({ fullstudent: [...this.state.fullstudent, this.state.student[studentIndex]] })
+            )
+        })
 
         // Lecturers
         await axios.get('/lecturers/5f913b7009a5c2577100e76e')

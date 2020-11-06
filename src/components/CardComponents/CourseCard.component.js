@@ -9,35 +9,36 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     minWidth: 345,
-    maxWidth: 345,
-    margin: 10,
-    transition: 'transform 450ms'
+    boxShadow: '0 0px 4px 2px rgba(156, 156, 156, .5)',
   },
-  // '&:hover root': {transform: scale(1.08)},
   media: {
     height: 300,
   },
+  title: {
+    padding: 5,
+  },
 });
 
-export default function LecturerCard(props) {
+export default function CourseCard({title, image}) {
   const classes = useStyles();
-
-  // console.log(p);
 
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={props.lecturer.avatar}
+          image={image}
           title="Contemplative Reptile"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            { props.lecturer.name }
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            { props.lecturer.position }
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            align='center'
+            className={classes.title}
+          >
+            {title}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import axios from '../axios';
 import Container from '@material-ui/core/Container';
-import LecturerCard from './LecturerCard.component';
-import StudentCard from './StudentCard.component';
+import LecturerCard from './CardComponents/LecturerCard.component';
+import StudentCard from './CardComponents/StudentCard.component';
+import CourseCard from './CardComponents/CourseCard.component';
 import IconButton from '@material-ui/core/IconButton';
 import { Button } from '@material-ui/core';
 import Youtube from 'react-youtube';
 import AppBar from './AppBar.component';
 import LeftBar from './LeftBar.component';
+import Tooltip from '@material-ui/core/Tooltip';
 import './home.component.css'
 
 class Home extends Component {
@@ -58,11 +61,11 @@ class Home extends Component {
                 comment: 'Very satisfied with the university. Great courses and content. Quality materials in each module that are explained and covered well. Access to online libraries, even though some articles and materials are not available for free in full.'
             },
             {
-                id: 3,
+                id: 2,
                 position: '1th Year Undergraduate Student',
                 comment: 'I love it. it is flexible. you can work alongside your study. you can study anytime you want during the day or even the night do you can adjust your study time around your work shift etc.'
             }
-        ]
+        ];
 
         studentReviews.map((review) => {
             return (
@@ -130,6 +133,37 @@ class Home extends Component {
         }
     }
 
+    getCourseCards() {
+        const courses = [
+            {
+                id: 0,
+                courseCode: 'cs',
+                title: 'Computer Science',
+                image: 'https://media.gettyimages.com/photos/-picture-id1256651755?s=2048x2048'
+            },
+            {
+                id: 1,
+                courseCode: 'is',
+                title: 'Information System',
+                image: 'https://media.gettyimages.com/photos/blue-and-purple-technology-background-circuit-board-picture-id1201452137?s=2048x2048'
+            }
+        ]
+
+        return courses.map((currentCourse) => {
+            return (
+                <Link to={'/courses/' + currentCourse.courseCode} style={{ textDecoration: 'none' }}>
+                    <div className='courseCard'>
+                        <CourseCard
+                            title={currentCourse.title}
+                            image={currentCourse.image}
+                            key={currentCourse.id}
+                        />
+                    </div>
+                </Link>
+            )
+        })
+    }
+
     getStudentCards() {
         return this.state.fullstudent.map((currentStudent) => {
             return (
@@ -164,36 +198,49 @@ class Home extends Component {
                 </Container>
             )
 
+        /*
+            Image Gallery
+            npm i react-image-gallery
+        */
+
         return (
             <React.Fragment>
                 <AppBar isDark={isDark} />
                 <LeftBar />
                 <Container className={`${isDark && 'darkMode'}`}>
                     <div id='top' />
-                    <div className='youtubeVideo'>
+                    <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
+                        COURSES
+                    </Typography>
+                    <div className='courseCards cards'>
+                        {this.getCourseCards()}
+                    </div>
+                    <div className='youtubeVideo cards'>
                         <Youtube videoId='oKu4GAeGjp8' />
                     </div>
                     <div className={`buttonTop ${showtopbutton && 'buttonTopShow'}`}>
-                        <IconButton color='primary'>
-                            <Button href='#top'>
-                                <Fab color="primary" size="large" aria-label="scroll back to top">
-                                    <KeyboardArrowUpIcon
-                                        fontSize='large'
-                                    />
-                                </Fab>
-                            </Button>
-                        </IconButton>
+                        <Tooltip title='Jump To Top' enterDelay={500} placement='bottom-end'>
+                            <IconButton color='primary'>
+                                <Button href='#top'>
+                                    <Fab color="primary" size="large" aria-label="scroll back to top">
+                                        <KeyboardArrowUpIcon
+                                            fontSize='large'
+                                        />
+                                    </Fab>
+                                </Button>
+                            </IconButton>
+                        </Tooltip>
                     </div>
-                    <Typography variant="h4" gutterBottom>
-                        Students
+                    <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
+                        STUDENTS
                     </Typography>
-                    <div className='studentCards'>
+                    <div className='studentCards cards'>
                         {this.getStudentCards()}
                     </div>
-                    <Typography variant="h4" gutterBottom>
-                        Lecturers
+                    <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
+                        LECTURERS
                     </Typography>
-                    <div className='lecturerCards'>
+                    <div className='lecturerCards cards'>
                         {this.getLecturerCards()}
                     </div>
                 </Container>

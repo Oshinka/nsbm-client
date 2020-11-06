@@ -27,36 +27,43 @@
     transform: scale(1.2) !important;
 }
 
+.courseCard {
+    opacity: 0.8;
+}
+
+.courseCard:hover {
+    opacity: 1;
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.02);
+}
+
 .darkMode{
     background-color: black;
 }
 
 .youtubeVideo {
-    display: flex;
     justify-content: center;
     padding: 20px;
 }
 
-.studentCards {
+.cards {
     display: flex;
+    margin: 10px 5px 20px;
+}
+
+.courseCards {
+    justify-content: space-evenly;
+}
+
+.studentCards {
     justify-content: space-between;
-    margin: 10px;
 }
 
 .lecturerCards {
-    display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
 }
 
 .lecturerCards::-webkit-scrollbar {
     display: none;
-}
-
-LecturerCard {
-    transition: transform 450ms;
-}
-
-LecturerCard:hover {
-    transform: scale(1.08);
 }

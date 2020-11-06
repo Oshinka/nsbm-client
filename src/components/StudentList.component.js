@@ -11,7 +11,9 @@ import { AgeFromDateString } from 'age-calculator'
 import Swal from 'sweetalert2';
 import axios from "../axios";
 
-const Student = ({ student, deleteStudent, key }) => (
+/* Handle empty students */
+
+const Student = ({ student, deleteStudent }) => (
   <tr>
     <td><Link to={"/students/profile/" + student._id}>
       {student.lastName ? `${student.firstName} ${student.lastName}` : `${student.firstName}`}
@@ -91,6 +93,8 @@ class StudentList extends Component {
     const indexOfFirstStudent = indexOfLastStudent - this.state.studentsPerPage;
     const paginateStudents = this.state.students.slice(indexOfFirstStudent, indexOfLastStudent);
 
+    /* backend pagination */
+    
     return paginateStudents.map((currentStudent) => {
       return (
         <Student

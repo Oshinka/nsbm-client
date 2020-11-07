@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from './components/Home.component';
+import Gallery from './components/Gallery.component';
 import Course from './components/Course.component';
 import StudentList from './components/StudentList.component';
 import CreateStudent from './components/CreateStudent.component';
@@ -36,6 +37,7 @@ class App extends React.Component {
       <div className='app'>
         <Router>
           <Route path='/' exact component={Home} />
+          <Route path='/gallery' exact component={Gallery} />
           <Route path='/courses/:course_code' exact component={Course} />
           <Route path='/students' exact component={StudentList} />
           <Route path='/students/add-student' exact component={CreateStudent} />

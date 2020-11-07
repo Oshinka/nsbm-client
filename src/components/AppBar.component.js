@@ -43,7 +43,7 @@ export default function ButtonAppBar({ isDark }) {
                     <Typography variant="h6" className={classes.title}>
                         NSBM
                     </Typography>
-                    <NavLink to={'/'} style={{ textDecoration: 'none' }} activeStyle={{ color:'white' }}>
+                    <NavLink to={'/gallery'} style={{ textDecorationLine: 'none', textDecorationColor: 'white' }} activeStyle={{ textDecorationColor: 'white' }}>
                     <Typography variant="h6" className={classes.control}>
                         GALLERY
                     </Typography>

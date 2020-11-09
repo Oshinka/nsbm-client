@@ -27,6 +27,11 @@
     transform: scale(1.2) !important;
 }
 
+.section {
+    margin: 25px 0;
+    padding: 25px 0;
+}
+
 .courseCard {
     opacity: 0.8;
 }
@@ -41,14 +46,8 @@
     background-color: black;
 }
 
-.youtubeVideo {
-    justify-content: center;
-    padding: 20px;
-}
-
 .cards {
     display: flex;
-    margin: 10px 5px 20px;
 }
 
 .courseCards {
@@ -66,4 +65,26 @@
 
 .lecturerCards::-webkit-scrollbar {
     display: none;
+}
+
+.contact {
+    background-color: #EBF5FB;
+}
+
+.contactForm {
+    max-width: 300px;
+}
+
+.contactFormBtn {
+    margin: 20px 120px !important;
+}
+
+.footer {
+    color: gray;
+    background-color: black;
+    padding: 5px 0;
+}
+
+.footer > .MuiSvgIcon-root {
+    margin: 0 10px;
 }

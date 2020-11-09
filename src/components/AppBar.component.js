@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -43,11 +43,11 @@ export default function ButtonAppBar({ isDark }) {
                     <Typography variant="h6" className={classes.title}>
                         NSBM
                     </Typography>
-                    <NavLink to={'/gallery'} style={{ textDecorationLine: 'none', textDecorationColor: 'white' }} activeStyle={{ textDecorationColor: 'white' }}>
-                    <Typography variant="h6" className={classes.control}>
-                        GALLERY
-                    </Typography>
-                    </NavLink>
+                    <Link to={'/gallery'} color='textSecondary' style={{ textDecorationLine: 'none' }}>
+                        <Typography variant="h6" className={classes.control}>
+                            GALLERY
+                        </Typography>
+                    </Link>
                     {(isDark) ? <BrightnessMediumIcon className={classes.control} /> : <BrightnessHighIcon className={classes.control} />}
                 </Toolbar>
             </AppBar>

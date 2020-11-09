@@ -1,1 +1,61 @@
-{}
+{
+    "studentReviews": [
+        {
+            "id": 0,
+            "position": "President of Student Union",
+            "comment": "Absolutely outstanding. I came back to study with the OU almost 20 years after dropping out of a traditional university. I suffer from mental health issues, but the support I have had from the OU has meant that is not been an issue at all."
+        },
+        {
+            "id": 1,
+            "position": "4th Year Undergraduate Student",
+            "comment": "Very satisfied with the university. Great courses and content. Quality materials in each module that are explained and covered well. Access to online libraries, even though some articles and materials are not available for free in full."
+        },
+        {
+            "id": 2,
+            "position": "1th Year Undergraduate Student",
+            "comment": "I love it. it is flexible. you can work alongside your study. you can study anytime you want during the day or even the night do you can adjust your study time around your work shift etc."
+        }
+    ],
+    "images": [
+        {
+            "original": "https://picsum.photos/id/1018/1000/300/",
+            "thumbnail": "https://picsum.photos/id/1018/250/150/"
+        },
+        {
+            "original": "https://picsum.photos/id/1015/1000/300/",
+            "thumbnail": "https://picsum.photos/id/1015/250/150/"
+        },
+        {
+            "original": "https://picsum.photos/id/1019/1000/300/",
+            "thumbnail": "https://picsum.photos/id/1019/250/150/"
+        }
+    ],
+    "home": {
+        "images": [
+            {
+                "original": "https://media.gettyimages.com/photos/view-of-harvard-yard-on-the-campus-of-harvard-university-on-july-08-picture-id1255056872?s=2048x2048",
+                "thumbnail": "https://media.gettyimages.com/photos/view-of-harvard-yard-on-the-campus-of-harvard-university-on-july-08-picture-id1255056872?s=170x170"
+            },
+            {
+                "original": "https://media.gettyimages.com/photos/portrait-of-young-man-holding-laptop-in-library-picture-id1200911079?s=2048x2048",
+                "thumbnail": "https://media.gettyimages.com/photos/portrait-of-young-man-holding-laptop-in-library-picture-id1200911079?s=170x170"
+            },
+            {
+                "original": "https://media.gettyimages.com/photos/desks-and-chairs-in-a-lecture-hall-picture-id1183046081?s=2048x2048",
+                "thumbnail": "https://media.gettyimages.com/photos/desks-and-chairs-in-a-lecture-hall-picture-id1183046081?s=170x170"
+            },
+            {
+                "original": "https://media.gettyimages.com/photos/teaching-a-class-online-from-home-picture-id1220236964?s=2048x2048",
+                "thumbnail": "https://media.gettyimages.com/photos/teaching-a-class-online-from-home-picture-id1220236964?s=170x170"
+            },
+            {
+                "original": "https://media.gettyimages.com/photos/group-of-young-adult-students-working-on-laptop-and-brainstorming-picture-id1144175392?s=2048x2048",
+                "thumbnail": "https://media.gettyimages.com/photos/group-of-young-adult-students-working-on-laptop-and-brainstorming-picture-id1144175392?s=170x170"
+            },
+            {
+                "original": "https://media.gettyimages.com/photos/female-student-looking-over-the-shoulder-and-smiling-picture-id1143904119?s=2048x2048",
+                "thumbnail": "https://media.gettyimages.com/photos/female-student-looking-over-the-shoulder-and-smiling-picture-id1143904119?s=170x170"
+            }
+        ]
+    }
+}

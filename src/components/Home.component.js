@@ -9,11 +9,18 @@ import LecturerCard from './CardComponents/LecturerCard.component';
 import StudentCard from './CardComponents/StudentCard.component';
 import CourseCard from './CardComponents/CourseCard.component';
 import IconButton from '@material-ui/core/IconButton';
-import { Button } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import Youtube from 'react-youtube';
 import AppBar from './AppBar.component';
 import LeftBar from './LeftBar.component';
 import Tooltip from '@material-ui/core/Tooltip';
+import ImageGallery from 'react-image-gallery';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import YouTubeIcon from '@material-ui/icons/YouTube';
+import Contact from './Contact.component';
+import Data from '../data.json';
 import './home.component.css'
 
 class Home extends Component {
@@ -49,25 +56,7 @@ class Home extends Component {
                 this.setState({ student: [...this.state.student, response.data] })
             })
 
-        const studentReviews = [
-            {
-                id: 0,
-                position: 'President of Student Union',
-                comment: 'Absolutely outstanding. I came back to study with the OU almost 20 years after dropping out of a traditional university. I suffer from mental health issues, but the support I have had from the OU has meant that is not been an issue at all.'
-            },
-            {
-                id: 1,
-                position: '4th Year Undergraduate Student',
-                comment: 'Very satisfied with the university. Great courses and content. Quality materials in each module that are explained and covered well. Access to online libraries, even though some articles and materials are not available for free in full.'
-            },
-            {
-                id: 2,
-                position: '1th Year Undergraduate Student',
-                comment: 'I love it. it is flexible. you can work alongside your study. you can study anytime you want during the day or even the night do you can adjust your study time around your work shift etc.'
-            }
-        ];
-
-        studentReviews.map((review) => {
+        Data.studentReviews.map((review) => {
             return (
                 this.setState({
                     student: [...this.state.student, {
@@ -121,7 +110,7 @@ class Home extends Component {
         this.setState({ isloading: false })
 
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
+            if (window.scrollY > 500) {
                 this.setState({ showtopbutton: true })
             } else {
                 this.setState({ showtopbutton: false })
@@ -198,26 +187,39 @@ class Home extends Component {
                 </Container>
             )
 
-        /*
-            Image Gallery
-            npm i react-image-gallery
-        */
-
         return (
             <React.Fragment>
+                <div id='top' />
                 <AppBar isDark={isDark} />
+                <ImageGallery
+                    items={Data.home.images}
+                    showNav={false}
+                    showFullscreenButton={false}
+                    showPlayButton={false}
+                    showThumbnails={false}
+                    slideDuration={2000}
+                    slideInterval={12000}
+                    autoPlay
+                    showBullets
+                />
                 <LeftBar />
                 <Container className={`${isDark && 'darkMode'}`}>
-                    <div id='top' />
-                    <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
-                        COURSES
-                    </Typography>
-                    <div className='courseCards cards'>
-                        {this.getCourseCards()}
-                    </div>
-                    <div className='youtubeVideo cards'>
-                        <Youtube videoId='oKu4GAeGjp8' />
-                    </div>
+                    <Grid className='section'>
+                        <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
+                            COURSES
+                        </Typography>
+                        <div className='courseCards cards'>
+                            {this.getCourseCards()}
+                        </div>
+                    </Grid>
+                    <Grid className='section'>
+                        <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
+                            STUDENT LIFE
+                        </Typography>
+                        <Grid  container direction='row' justify='center'>
+                            <Youtube videoId='oKu4GAeGjp8' />
+                        </Grid>
+                    </Grid>
                     <div className={`buttonTop ${showtopbutton && 'buttonTopShow'}`}>
                         <Tooltip title='Jump To Top' enterDelay={500} placement='bottom-end'>
                             <IconButton color='primary'>
@@ -231,19 +233,42 @@ class Home extends Component {
                             </IconButton>
                         </Tooltip>
                     </div>
-                    <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
-                        STUDENTS
-                    </Typography>
-                    <div className='studentCards cards'>
-                        {this.getStudentCards()}
-                    </div>
-                    <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
-                        LECTURERS
-                    </Typography>
-                    <div className='lecturerCards cards'>
-                        {this.getLecturerCards()}
-                    </div>
+                    <Grid className='section'>
+                        <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
+                            STUDENTS
+                        </Typography>
+                        <div className='studentCards cards'>
+                            {this.getStudentCards()}
+                        </div>
+                    </Grid>
+                    <Grid className='section'>
+                        <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
+                            LECTURERS
+                        </Typography>
+                        <div className='lecturerCards cards'>
+                            {this.getLecturerCards()}
+                        </div>
+                    </Grid>
+                    <Grid className='section contact'>
+                        <Contact />
+                    </Grid>
                 </Container>
+                <Grid container wrap='nowrap' direction='row' justify='center' alignItems='center' className='footer'>
+                    <Typography>Powered by Dumindu Oshinka</Typography>
+                    <IconButton href='https://www.facebook.com/dumindu.oshinka' color='inherit'>
+                        <FacebookIcon />
+                    </IconButton>
+                    <IconButton href='https://www.instagram.com/duminduoshinka/' color='inherit'>
+                        <InstagramIcon />
+                    </IconButton>
+                    <IconButton href='https://twitter.com/dumindu_oshinka' color='inherit'>
+                        <TwitterIcon />
+                    </IconButton>
+                    <IconButton href='https://youtube.com/channel/UCSZF6_M-ehRJbmlOHswRqhw' color='inherit'>
+                        <YouTubeIcon />
+                    </IconButton>
+                </Grid>
+                    
             </React.Fragment>
         );
     }

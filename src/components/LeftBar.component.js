@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         width: 250,
     },
     leftbar: {
-        height: 1000,
+        height: 2000,
         float: 'left'
     },
     logo: {

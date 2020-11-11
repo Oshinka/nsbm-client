@@ -57,5 +57,35 @@
                 "thumbnail": "https://media.gettyimages.com/photos/female-student-looking-over-the-shoulder-and-smiling-picture-id1143904119?s=170x170"
             }
         ]
+    },
+    "courses": [
+        {
+            "id": 0,
+            "courseCode": "cs",
+            "title": "Computer Science",
+            "image": "https://media.gettyimages.com/photos/-picture-id1256651755?s=2048x2048"
+        },
+        {
+            "id": 1,
+            "courseCode": "is",
+            "title": "Information System",
+            "image": "https://media.gettyimages.com/photos/blue-and-purple-technology-background-circuit-board-picture-id1201452137?s=2048x2048"
+        }
+    ],
+    "course": {
+        "cs": {
+            "name": "COMPUTER SCIENCE",
+            "cover": "https://media.gettyimages.com/photos/-picture-id1256651755?s=2048x2048",
+            "priceInUSD": 7593,
+            "priceInLKR": 1400000,
+            "description": "Computer Science is the study of computers and computational systems. Unlike electrical and computer engineers, computer scientists deal mostly with software and software systems; this includes their theory, design, development, and application"
+        },
+        "is": {
+            "name": "INFORMATION SYSTEM",
+            "cover": "https://media.gettyimages.com/photos/blue-and-purple-technology-background-circuit-board-picture-id1201452137?s=2048x2048",
+            "priceInUSD": 6508,
+            "priceInLKR": 1200000,
+            "description": "An Information system is a formal, sociotechnical, organizational system designed to collect, process, store, and distribute information. In a sociotechnical perspective, information systems are composed by four components: task, people, structure, and technology. "
+        }
     }
 }

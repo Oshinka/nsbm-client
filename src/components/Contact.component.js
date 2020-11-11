@@ -19,7 +19,8 @@ function Contact() {
     const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
     const [message, setMessage] = useState('');
-    const [open, setOpen] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false);
 
     const reset = () => {
         setName('');
@@ -28,28 +29,13 @@ function Contact() {
         setMessage('');
     }
 
-    const onSuccess = () => (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success">
-                Message has been sent successfully!
-            </Alert>
-        </Snackbar>
-    )
-
-    const onError = () => (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error">
-                Message was not sent!
-            </Alert>
-        </Snackbar>
-    )
-
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
 
-        setOpen(false);
+        setSuccess(false);
+        setError(false);
     };
 
     const sendEmail = e => {
@@ -67,18 +53,16 @@ function Contact() {
         emailjs.send('service_nsbm', 'template_contact_home', templateParams, 'user_IEVOpMbXgEGRrOezcMmfg')
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
-                setOpen(true);
                 reset();
+                setSuccess(true);
                 axios.post('/subscribers', templateParams)
                     .then(res => {
                         console.log(res.data);
                     })
-                onSuccess();
             }, (error) => {
                 console.log('FAILED...', error);
-                setOpen(true);
                 reset();
-                onError();
+                setError(true);
             });
 
         // reset();
@@ -86,6 +70,16 @@ function Contact() {
 
     return (
         <React.Fragment>
+            <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success">
+                    Message has been sent successfully!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                    Message was not sent!
+                </Alert>
+            </Snackbar>
             <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
                 CONTACT
             </Typography>

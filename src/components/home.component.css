@@ -42,6 +42,17 @@
     transform: scale(1.02);
 }
 
+/* Course component */
+.enroll:hover {
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.1);
+    background-color: green !important;
+}
+
+.activeEnroll{
+    background-color: blue !important;
+}
+
 .darkMode{
     background-color: black;
 }

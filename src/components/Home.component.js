@@ -123,22 +123,8 @@ class Home extends Component {
     }
 
     getCourseCards() {
-        const courses = [
-            {
-                id: 0,
-                courseCode: 'cs',
-                title: 'Computer Science',
-                image: 'https://media.gettyimages.com/photos/-picture-id1256651755?s=2048x2048'
-            },
-            {
-                id: 1,
-                courseCode: 'is',
-                title: 'Information System',
-                image: 'https://media.gettyimages.com/photos/blue-and-purple-technology-background-circuit-board-picture-id1201452137?s=2048x2048'
-            }
-        ]
 
-        return courses.map((currentCourse) => {
+        return Data.courses.map((currentCourse) => {
             return (
                 <Link to={'/courses/' + currentCourse.courseCode} style={{ textDecoration: 'none' }}>
                     <div className='courseCard'>
@@ -243,7 +229,7 @@ class Home extends Component {
                     </Grid>
                     <Grid className='section'>
                         <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
-                            LECTURERS
+                            ACADEMIC STAFF
                         </Typography>
                         <div className='lecturerCards cards'>
                             {this.getLecturerCards()}

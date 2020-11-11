@@ -28,8 +28,6 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            student: [],
-            fullstudent: [],
             management: [],
             showtopbutton: false,
             isloading: false,
@@ -39,42 +37,6 @@ class Home extends Component {
 
     async componentDidMount() {
         this.setState({ isloading: true })
-
-        // Students
-        await axios.get('/students/5f7c9961ac8ac64c4172cafa')
-            .then(response => {
-                this.setState({ student: [...this.state.student, response.data] })
-            })
-
-        await axios.get('/students/5f7f3cf074c41cc08e7d49af')
-            .then(response => {
-                this.setState({ student: [...this.state.student, response.data] })
-            })
-
-        await axios.get('/students/5f80423c620aa04f4b48db20')
-            .then(response => {
-                this.setState({ student: [...this.state.student, response.data] })
-            })
-
-        Data.studentReviews.map((review) => {
-            return (
-                this.setState({
-                    student: [...this.state.student, {
-                        ...this.state.student[review.id],
-                        position: review.position,
-                        comment: review.comment
-                    }]
-                })
-            )
-        })
-
-        const studentIndexes = [3, 4, 5];
-
-        studentIndexes.map((studentIndex) => {
-            return (
-                this.setState({ fullstudent: [...this.state.fullstudent, this.state.student[studentIndex]] })
-            )
-        })
 
         // Lecturers
         await axios.get('/lecturers/5f913b7009a5c2577100e76e')
@@ -140,11 +102,14 @@ class Home extends Component {
     }
 
     getStudentCards() {
-        return this.state.fullstudent.map((currentStudent) => {
+        return Data.studentReviews.map((currentStudent) => {
             return (
                 <StudentCard
-                    student={currentStudent}
-                    key={currentStudent._id}
+                    name={currentStudent.name}
+                    avatar={currentStudent.avatar}
+                    position={currentStudent.position}
+                    comment={currentStudent.comment}
+                    key={currentStudent.id}
                 />
             )
         })

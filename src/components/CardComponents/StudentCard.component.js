@@ -15,14 +15,15 @@ const useStyles = makeStyles({
     boxShadow: '0 4px 6px 4px rgba(156, 156, 156, .5)',
     transition: 'transform 450ms'
   },
-  // '&:hover, &root': {transform: LinearScale},
   media: {
     height: 200,
   },
 });
 
-export default function StudentCard(props) {
+export default function StudentCard({ name, avatar, position, comment }) {
   const classes = useStyles();
+
+  console.log('here', name);
 
   function truncate(str, n) {
       return str?.length>n ? str.substr(0, n-1)+'...' : str;
@@ -33,18 +34,18 @@ export default function StudentCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={props.student.avatar}
+          image={avatar}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            { props.student.name }
+            { name }
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
-            { props.student.position }
+            { position }
           </Typography><hr />
           <Typography variant="body2" color="textSecondary" component="p">
-            { truncate(props.student.comment, 250) }
+            { truncate(comment, 250) }
           </Typography>
         </CardContent>
       </CardActionArea>

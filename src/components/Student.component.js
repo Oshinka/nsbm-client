@@ -18,7 +18,7 @@ class Student extends Component {
     }
 
     componentDidMount() {
-        axios.get('/students/' + this.props.match.params.id)
+        axios.get('/students/me', {headers: {'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiY2M5NTlmYzIxYTc4ZGEzZTcxZTciLCJpYXQiOjE2MDUwOTU3OTd9.QWCCgOWpurC7Cx5iktUQD_0MqqtieHAUcQghvXamJ-U'}})
             .then(response => {
                 this.setState({
                     firstName: response.data.firstName,

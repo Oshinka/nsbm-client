@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import AppBar from './AppBar.component';
 import LeftBar from './LeftBar.component';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
@@ -109,6 +110,7 @@ class StudentList extends Component {
   render() {
     return (
       <React.Fragment>
+        <AppBar />
         <LeftBar Icon={PersonAddIcon} link='/students/add-student' name='Add Student' />
         <Container>
           <Link to={"/students/add-student"}>+ add student</Link>

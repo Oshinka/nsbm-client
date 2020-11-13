@@ -22,6 +22,7 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 import Contact from './Contact.component';
 import Data from '../data.json';
 import './home.component.css'
+import { AppBarProvider } from './AppBarContext.component';
 
 class Home extends Component {
     constructor(props) {
@@ -30,8 +31,7 @@ class Home extends Component {
         this.state = {
             management: [],
             showtopbutton: false,
-            isloading: false,
-            isDark: false
+            isloading: false
         }
     }
 
@@ -141,7 +141,9 @@ class Home extends Component {
         return (
             <React.Fragment>
                 <div id='top' />
-                <AppBar isDark={isDark} />
+                <AppBarProvider>
+                    <AppBar />
+                </AppBarProvider>
                 <ImageGallery
                     items={Data.home.images}
                     showNav={false}

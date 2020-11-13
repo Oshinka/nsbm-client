@@ -11,6 +11,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import { AgeFromDateString } from 'age-calculator'
 import Swal from 'sweetalert2';
 import axios from "../axios";
+import { AppBarProvider } from './AppBarContext.component';
 
 /* Handle empty students */
 
@@ -110,7 +111,9 @@ class StudentList extends Component {
   render() {
     return (
       <React.Fragment>
-        <AppBar />
+        <AppBarProvider>
+          <AppBar />
+        </AppBarProvider>
         <LeftBar Icon={PersonAddIcon} link='/students/add-student' name='Add Student' />
         <Container>
           <Link to={"/students/add-student"}>+ add student</Link>

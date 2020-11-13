@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Swal from 'sweetalert2';
@@ -8,9 +8,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
-import BrightnessMediumIcon from '@material-ui/icons/BrightnessMedium';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import axios from '../axios';
+import { AppBarContext } from './AppBarContext.component';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,8 +45,79 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar({ isDark }) {
     const classes = useStyles();
 
-    const [name, setName] = useState('');
-    const [avatar, setAvatar] = useState('');
+    const [name, setName, avatar, setAvatar] = useContext(AppBarContext);
+
+    const [openNavDrop, setOpenNavDrop] = React.useState(null);
+
+    const handleClick = (event) => {
+        setOpenNavDrop(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setOpenNavDrop(null);
+    };
+
+    const handleLogin = async () => {
+        handleClose();
+
+        const { value: credentials } = await Swal.fire({
+            title: 'LOGIN',
+            html:
+                '<input id="swal-input1" placeholder="E-mail" class="swal2-input">' +
+                '<input id="swal-input2" placeholder="Password" class="swal2-input">',
+            focusConfirm: false,
+            preConfirm: () => {
+                return {
+                    email: document.getElementById('swal-input1').value,
+                    password: document.getElementById('swal-input2').value
+                }
+            }
+        })
+
+        if (credentials) {
+            console.log(credentials);
+        }
+
+        await axios.post('/students/login', credentials)
+            .then(response => {
+                console.log(response.data.token);
+                localStorage.setItem('jwtToken', response.data.token);
+                axios.get('/students/me', { headers: { 'Authorization': response.data.token } })
+                    .then(response => {
+                        setName(response.data.firstName);
+                        setAvatar(response.data.avatar);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            })
+    }
+
+    const handleLogout = () => {
+        handleClose();
+
+        axios.get('/students/logout', { headers: { 'Authorization': localStorage.jwtToken } })
+            .then(response => {
+                console.log(response.data);
+                localStorage.removeItem('jwtToken');
+                setName('');
+                setAvatar('');
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+    useEffect(() => {
+        axios.get('/students/me', { headers: { 'Authorization': localStorage.jwtToken } })
+            .then(response => {
+                setName(response.data.firstName);
+                setAvatar(response.data.avatar);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    })
 
     return (
         <div className={classes.root}>
@@ -66,58 +139,26 @@ export default function ButtonAppBar({ isDark }) {
                     </Link>
                     <Avatar src={avatar} className={classes.control} />
                     {
-                        (name)
-                            ?
+                        (name) ?
                             <Typography variant="h6" className={classes.control}>
                                 {name}
-                            </Typography>
-                            :
-                            <Link
-                                onClick={async () => {
-                                    const { value: credentials } = await Swal.fire({
-                                        title: 'LOGIN',
-                                        html:
-                                            '<input id="swal-input1" placeholder="E-mail" class="swal2-input">' +
-                                            '<input id="swal-input2" placeholder="Password" class="swal2-input">',
-                                        focusConfirm: false,
-                                        preConfirm: () => {
-                                            return {
-                                                email: document.getElementById('swal-input1').value,
-                                                password: document.getElementById('swal-input2').value
-                                            }
-                                        }
-                                    })
-
-                                    if (credentials) {
-                                        console.log(credentials);
-                                        console.log(credentials.email);
-                                        console.log(credentials.password);
-                                    }
-
-                                    await axios.post('/students/login', credentials)
-                                        .then(response => {
-                                            console.log(response.data.token);
-                                            axios.get('/students/me', { headers: { 'Authorization': response.data.token } })
-                                                .then(response => {
-                                                    setName(response.data.firstName);
-                                                    setAvatar(response.data.avatar);
-                                                })
-                                                .catch(function (error) {
-                                                    console.log(error);
-                                                })
-                                        })
-
-
-
-                                }}
-                                className={classes.menuButton}
-                            >
-                                <Typography variant="h6" className={classes.control}>
-                                    LOGIN
-                                </Typography>
-                            </Link>
+                            </Typography> : ''
                     }
-                    {(isDark) ? <BrightnessMediumIcon className={classes.control} /> : <BrightnessHighIcon className={classes.control} />}
+                    <IconButton aria-controls='dropDownMenu' aria-haspopup={true} onClick={handleClick} className={classes.control}>
+                        <ArrowDropDownIcon fontSize='large' className={classes.menuButton} />
+                    </IconButton>
+                    <Menu
+                        id='dropDownMenu'
+                        openNavDrop={openNavDrop}
+                        keepMounted
+                        open={Boolean(openNavDrop)}
+                        onClose={handleClose}
+                        style={{ top: '-196px', left: '1881px' }}
+                    >
+                        <MenuItem onClick={()=>{window.location='/'}}>Profile</MenuItem>
+                        <MenuItem onClick={handleLogin}>Login</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    </Menu>
                 </Toolbar>
             </AppBar>
         </div>

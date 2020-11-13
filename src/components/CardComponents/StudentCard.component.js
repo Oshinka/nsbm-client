@@ -23,8 +23,6 @@ const useStyles = makeStyles({
 export default function StudentCard({ name, avatar, position, comment }) {
   const classes = useStyles();
 
-  console.log('here', name);
-
   function truncate(str, n) {
       return str?.length>n ? str.substr(0, n-1)+'...' : str;
   }

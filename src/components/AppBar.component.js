@@ -7,12 +7,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import axios from '../axios';
 import { AppBarContext } from './AppBarContext.component';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout, switchBrightness } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,10 +44,17 @@ const useStyles = makeStyles((theme) => ({
     control: {
         margin: theme.spacing(2),
     },
+    hrControl: {
+        marginLeft: 16,
+        marginRight: 16,
+    }
 }));
 
 export default function ButtonAppBar() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    const isDark = useSelector(state => state.isDark)
 
     const [name, setName, avatar, setAvatar] = useContext(AppBarContext);
 
@@ -108,15 +119,22 @@ export default function ButtonAppBar() {
             })
     }
 
+    
+
     useEffect(() => {
-        axios.get('/students/me', { headers: { 'Authorization': localStorage.jwtToken } })
-            .then(response => {
-                setName(response.data.firstName);
-                setAvatar(response.data.avatar);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+
+        if (localStorage.jwtToken) {
+            axios.get('/students/me', { headers: { 'Authorization': localStorage.jwtToken } })
+                .then(response => {
+                    setName(response.data.firstName);
+                    setAvatar(response.data.avatar);
+                    dispatch(login());
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
+        dispatch(logout());
     })
 
     return (
@@ -131,20 +149,23 @@ export default function ButtonAppBar() {
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
                         NSBM
-                        </Typography>
+                    </Typography>
+                    <IconButton onClick={() => dispatch(switchBrightness())}>
+                        { (isDark) ? <Brightness4Icon fontSize='large' className={classes.menuButton} /> : <BrightnessHighIcon fontSize='large' className={classes.menuButton} /> }
+                    </IconButton>
                     <Link to={'/gallery'} className={classes.menuButton}>
                         <Typography variant="h6" className={classes.control}>
                             GALLERY
                         </Typography>
                     </Link>
-                    <Avatar src={avatar} className={classes.control} />
+                    <Avatar src={avatar} className={classes.hrControl} />
                     {
                         (name) ?
                             <Typography variant="h6" className={classes.control}>
                                 {name}
                             </Typography> : ''
                     }
-                    <IconButton aria-controls='dropDownMenu' aria-haspopup={true} onClick={handleClick} className={classes.control}>
+                    <IconButton aria-controls='dropDownMenu' aria-haspopup={true} onClick={handleClick} className={classes.hrControl}>
                         <ArrowDropDownIcon fontSize='large' className={classes.menuButton} />
                     </IconButton>
                     <Menu
@@ -155,7 +176,7 @@ export default function ButtonAppBar() {
                         onClose={handleClose}
                         style={{ top: '-196px', left: '1881px' }}
                     >
-                        <MenuItem onClick={()=>{window.location='/'}}>Profile</MenuItem>
+                        <MenuItem onClick={() => { window.location = '/' }}>Profile</MenuItem>
                         <MenuItem onClick={handleLogin}>Login</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </Menu>

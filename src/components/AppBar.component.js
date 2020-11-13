@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ButtonAppBar({ isDark }) {
+export default function ButtonAppBar() {
     const classes = useStyles();
 
     const [name, setName, avatar, setAvatar] = useContext(AppBarContext);

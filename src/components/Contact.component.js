@@ -8,6 +8,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import emailjs from 'emailjs-com';
 import axios from '../axios';
 import './home.component.css';
+import { useSelector } from 'react-redux';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -68,6 +69,8 @@ function Contact() {
         // reset();
     }
 
+    const isLogged = useSelector(state => state.isLogged);
+
     return (
         <React.Fragment>
             <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
@@ -83,6 +86,7 @@ function Contact() {
             <Typography variant="h2" color='textSecondary' gutterBottom align='center'>
                 CONTACT
             </Typography>
+            {isLogged?'YOURE LOGGED IN':'YOU NEED TO LOG'}
             <div>
                 <Grid container direction='row' wrap='nowrap' justify='space-between' >
                     <TextField

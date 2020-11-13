@@ -11,8 +11,10 @@ import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
 import Data from '../data.json';
 import axios from '../axios';
+import { AppBarProvider } from './AppBarContext.component';
 import './home.component.css'
 import 'fontsource-roboto';
+
 
 export class Course extends Component {
     constructor(props) {
@@ -84,7 +86,9 @@ export class Course extends Component {
 
         return (
             <React.Fragment>
-                <AppBar />
+                <AppBarProvider>
+                    <AppBar />
+                </AppBarProvider>
                 {/* <LeftBar /> */}
                 <img
                     src={stream.cover}

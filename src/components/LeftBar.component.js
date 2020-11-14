@@ -13,13 +13,15 @@ import IconButton from '@material-ui/core/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SubjectIcon from '@material-ui/icons/Subject';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
     list: {
         width: 250,
     },
     leftbar: {
-        height: 2000,
+        position: 'fixed',
+        height: '100vh',
         float: 'left'
     },
     logo: {
@@ -27,6 +29,10 @@ const useStyles = makeStyles({
         marginLeft: 40,
         marginBottom: 10,
     },
+    darkMode: {
+        backgroundColor: '#424242',
+        minHeight: '100vh'
+    }
 });
 
 export default function TemporaryDrawer({ Icon, link, name }) {
@@ -38,6 +44,8 @@ export default function TemporaryDrawer({ Icon, link, name }) {
         right: false,
     });
 
+    const isDark = useSelector(state => state.isDark)
+
     const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -48,13 +56,13 @@ export default function TemporaryDrawer({ Icon, link, name }) {
 
     const list = (anchor) => (
         <div
-            className={clsx(classes.list)}
+            className={clsx(classes.list, (isDark && classes.darkMode))}
             role="presentation"
             onMouseLeave={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-            <img className={classes.logo} src='https://www.nsbm.ac.lk/wp-content/uploads/2019/08/logo.png' alt='logo' />
+            <img className={classes.logo} src='https://www.pikpng.com/pngl/b/71-715532_nsbm-green-university-logo-clipart.png' alt='logo' />
                 <NavLink to='/' style={{ textDecorationLine: 'none' }} >
                     <ListItem button>
                         <ListItemIcon><IconButton><HomeIcon /></IconButton></ListItemIcon>

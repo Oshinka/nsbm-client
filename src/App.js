@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { AppBarProvider } from './components/AppBarContext.component';
 
+import AppBar from './components/AppBar.component';
 import Home from './components/Home.component';
 import Gallery from './components/Gallery.component';
 import Course from './components/Course.component';
@@ -15,6 +17,7 @@ import EditLecturer from './components/EditLecturer.component';
 import SubjectList from './components/SubjectList.component';
 import CreateSubject from './components/CreateSubject.component';
 import EditSubject from './components/EditSubject.component';
+import Footer from './components/Footer.component';
 
 class App extends React.Component {
   constructor(props) {
@@ -36,6 +39,9 @@ class App extends React.Component {
     return (
       <div className='app'>
         <Router>
+          <AppBarProvider>
+            <AppBar />
+          </AppBarProvider>
           <Route path='/' exact component={Home} />
           <Route path='/gallery' exact component={Gallery} />
           <Route path='/courses/:course_code' exact component={Course} />
@@ -49,6 +55,7 @@ class App extends React.Component {
           <Route path='/subjects' exact component={SubjectList} />
           <Route path='/subjects/add-subject' exact component={CreateSubject} />
           <Route path='/subjects/edit/:id' exact component={EditSubject} />
+          <Footer />
         </Router>
       </div>
     );

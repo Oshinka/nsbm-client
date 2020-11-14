@@ -22,6 +22,44 @@
             "comment": "I love it. it is flexible. you can work alongside your study. you can study anytime you want during the day or even the night do you can adjust your study time around your work shift etc."
         }
     ],
+    "academicStaff": [
+        {
+            "id": 0,
+            "name": "Dr. Hewagamage",
+            "avatar": "https://media.gettyimages.com/photos/portrait-of-smiling-professor-in-the-amphitheater-picture-id1128666909?s=2048x2048",
+            "position": "Director"
+        },
+        {
+            "id": 1,
+            "name": "Dr. Ajantha",
+            "avatar": "https://media.gettyimages.com/photos/portrait-of-smiling-professor-at-podium-with-university-students-in-picture-id148314912?s=2048x2048",
+            "position": "Deputy Director"
+        },
+        {
+            "id": 2,
+            "name": "Dr. Jeewani",
+            "avatar": "https://media.gettyimages.com/photos/teacher-at-the-blackboard-picture-id157481961?s=2048x2048",
+            "position": "Head of Information System"
+        },
+        {
+            "id": 3,
+            "name": "Dr. Kasun De Zoyza",
+            "avatar": "https://media.gettyimages.com/photos/caucasian-teacher-standing-at-chalkboard-picture-id597318627?s=2048x2048",
+            "position": "Senior Lecturer"
+        },
+        {
+            "id": 4,
+            "name": "Dr. Malik Silva",
+            "avatar": "https://media.gettyimages.com/photos/happy-college-teacher-in-his-classroom-picture-id155350396?s=2048x2048",
+            "position": "Lecturer"
+        },
+        {
+            "id": 5,
+            "name": "Ms. Iresha",
+            "avatar": "https://media.gettyimages.com/photos/teacher-at-classroom-picture-id506103087?s=2048x2048",
+            "position": "Instructor"
+        }
+    ],
     "images": [
         {
             "original": "https://picsum.photos/id/1018/1000/300/",

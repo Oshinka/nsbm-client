@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import AppBar from './AppBar.component';
 import LeftBar from './LeftBar.component';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
@@ -11,7 +10,6 @@ import Pagination from '@material-ui/lab/Pagination';
 import { AgeFromDateString } from 'age-calculator'
 import Swal from 'sweetalert2';
 import axios from "../axios";
-import { AppBarProvider } from './AppBarContext.component';
 
 /* Handle empty students */
 
@@ -111,9 +109,6 @@ class StudentList extends Component {
   render() {
     return (
       <React.Fragment>
-        <AppBarProvider>
-          <AppBar />
-        </AppBarProvider>
         <LeftBar Icon={PersonAddIcon} link='/students/add-student' name='Add Student' />
         <Container>
           <Link to={"/students/add-student"}>+ add student</Link>

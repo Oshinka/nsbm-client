@@ -27,6 +27,10 @@
     transform: scale(1.2) !important;
 }
 
+.textColor {
+    color: gray;
+}
+
 .section {
     margin: 25px 0;
     padding: 25px 0;
@@ -53,10 +57,6 @@
     background-color: blue !important;
 }
 
-.darkMode{
-    background-color: black;
-}
-
 .cards {
     display: flex;
 }
@@ -76,6 +76,10 @@
 
 .lecturerCards::-webkit-scrollbar {
     display: none;
+}
+
+.contact {
+    background-color: #EBF5FB;
 }
 
 .contact {

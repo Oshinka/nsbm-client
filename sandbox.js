@@ -37,3 +37,21 @@ export class Projects extends Component {
 }
 
 export default Projects
+
+            /* LOADING ICON */
+            this.setState({ isloading: true })
+
+            this.setState({ isloading: false })            
+
+            if (this.state.isloading)
+            return (
+                <Container>
+                    <div className='loadingIcon'>
+                        <img src='https://loading.io/mod/spinner/camera/index.svg' alt='loading...' />
+                    </div>
+                </Container>
+            )
+
+            return {
+                {/* Main code gose here */}
+            }

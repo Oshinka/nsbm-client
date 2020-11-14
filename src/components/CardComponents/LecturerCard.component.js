@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LecturerCard(props) {
+export default function LecturerCard({ name, avatar, position }) {
   const classes = useStyles();
 
   return (
@@ -27,15 +27,15 @@ export default function LecturerCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={props.lecturer.avatar}
+          image={avatar}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            { props.lecturer.name }
+            { name }
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            { props.lecturer.position }
+            { position }
           </Typography>
         </CardContent>
       </CardActionArea>

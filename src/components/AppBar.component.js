@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Swal from 'sweetalert2';
@@ -58,7 +58,7 @@ export default function ButtonAppBar() {
 
     const [name, setName, avatar, setAvatar] = useContext(AppBarContext);
 
-    const [openNavDrop, setOpenNavDrop] = React.useState(null);
+    const [openNavDrop, setOpenNavDrop] = useState(null);
 
     const handleClick = (event) => {
         setOpenNavDrop(event.currentTarget);
@@ -151,7 +151,7 @@ export default function ButtonAppBar() {
                         NSBM
                     </Typography>
                     <IconButton onClick={() => dispatch(switchBrightness())}>
-                        { (isDark) ? <Brightness4Icon fontSize='large' className={classes.menuButton} /> : <BrightnessHighIcon fontSize='large' className={classes.menuButton} /> }
+                        { (isDark) ? <Brightness4Icon className={classes.menuButton} /> : <BrightnessHighIcon className={classes.menuButton} /> }
                     </IconButton>
                     <Link to={'/gallery'} className={classes.menuButton}>
                         <Typography variant="h6" className={classes.control}>
@@ -170,11 +170,10 @@ export default function ButtonAppBar() {
                     </IconButton>
                     <Menu
                         id='dropDownMenu'
-                        openNavDrop={openNavDrop}
+                        anchorEl={openNavDrop}
                         keepMounted
                         open={Boolean(openNavDrop)}
                         onClose={handleClose}
-                        style={{ top: '-196px', left: '1881px' }}
                     >
                         <MenuItem onClick={() => { window.location = '/' }}>Profile</MenuItem>
                         <MenuItem onClick={handleLogin}>Login</MenuItem>

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { AppBarProvider } from './components/AppBarContext.component';
 
 import AppBar from './components/AppBar.component';
+import Breadcrumbs from './components/Breadcrumbs.component';
 import Home from './components/Home.component';
 import Gallery from './components/Gallery.component';
 import Course from './components/Course.component';
@@ -42,6 +43,7 @@ class App extends React.Component {
           <AppBarProvider>
             <AppBar />
           </AppBarProvider>
+          <Breadcrumbs />
           <Route path='/' exact component={Home} />
           <Route path='/gallery' exact component={Gallery} />
           <Route path='/courses/:course_code' exact component={Course} />

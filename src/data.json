@@ -131,5 +131,67 @@
             "priceInLKR": 1200000,
             "description": "An Information system is a formal, sociotechnical, organizational system designed to collect, process, store, and distribute information. In a sociotechnical perspective, information systems are composed by four components: task, people, structure, and technology. "
         }
-    }
+    },
+    "breadcrumbs": [
+        {
+            "id": 0,
+            "paramName": "gallery",
+            "displayName": "Gallery",
+            "icon": "ViewQuiltIcon"
+        },
+        {
+            "id": 1,
+            "paramName": "courses",
+            "displayName": "Courses",
+            "icon": "LibraryBooksIcon"
+        },
+        {
+            "id": 2,
+            "paramName": "students",
+            "displayName": "Students",
+            "icon": "PersonIcon"
+        },
+        {
+            "id": 3,
+            "paramName": "add-student",
+            "displayName": "Add Student",
+            "icon": "PersonAddIcon"
+        },
+        {
+            "id": 4,
+            "paramName": "edit",
+            "displayName": "Edit",
+            "icon": "EditIcon"
+        },
+        {
+            "id": 5,
+            "paramName": "profile",
+            "displayName": "Profile",
+            "icon": "AssignmentIndIcon"
+        },
+        {
+            "id": 6,
+            "paramName": "lecturers",
+            "displayName": "Lecturers",
+            "icon": "PersonOutlineTwoToneIcon"
+        },
+        {
+            "id": 7,
+            "paramName": "add-lecturer",
+            "displayName": "Add Lecturer",
+            "icon": "PersonAddTwoToneIcon"
+        },
+        {
+            "id": 8,
+            "paramName": "subjects",
+            "displayName": "Subjects",
+            "icon": "SubjectIcon"
+        },
+        {
+            "id": 9,
+            "paramName": "add-subject",
+            "displayName": "Add Subjects",
+            "icon": "PlaylistAddIcon"
+        }
+    ]
 }

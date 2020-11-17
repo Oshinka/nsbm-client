@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import TelegramIcon from '@material-ui/icons/Telegram';
-import LeftBar from './LeftBar.component';
 import Paypal from './Paypal.component';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
@@ -77,7 +76,6 @@ export default function Course({match}) {
 
     return (
         <React.Fragment>
-            <LeftBar />
             <img
                 src={stream.cover}
                 width='100%'

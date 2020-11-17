@@ -1,9 +1,10 @@
-import { loginReducer, darkModeReducer } from './appBar';
+import { loginReducer, darkModeReducer, drawerReducer } from './appBar';
 import { combineReducers } from 'redux';
 
 const rootReducers = combineReducers({
     isLogged: loginReducer,
-    isDark: darkModeReducer
+    isDark: darkModeReducer,
+    isOpenDrawer: drawerReducer
 });
 
 export default rootReducers;

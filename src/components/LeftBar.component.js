@@ -13,16 +13,13 @@ import IconButton from '@material-ui/core/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SubjectIcon from '@material-ui/icons/Subject';
-import { useSelector } from 'react-redux';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { useSelector, useDispatch } from 'react-redux';
+import { closeDrawer } from '../actions';
 
 const useStyles = makeStyles({
     list: {
         width: 250,
-    },
-    leftbar: {
-        position: 'fixed',
-        height: '100vh',
-        float: 'left'
     },
     logo: {
         height: 64,
@@ -37,21 +34,15 @@ const useStyles = makeStyles({
 
 export default function TemporaryDrawer({ Icon, link, name }) {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        top: false,
-        left: false,
-        bottom: false,
-        right: false,
-    });
+    const dispatch = useDispatch();
 
-    const isDark = useSelector(state => state.isDark)
+    const isDark = useSelector(state => state.isDark);
+    const isOpenDrawer = useSelector(state => state.isOpenDrawer);
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-
-        setState({ ...state, [anchor]: open });
     };
 
     const list = (anchor) => (
@@ -62,7 +53,8 @@ export default function TemporaryDrawer({ Icon, link, name }) {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-            <img className={classes.logo} src='https://www.pikpng.com/pngl/b/71-715532_nsbm-green-university-logo-clipart.png' alt='logo' />
+                <img className={classes.logo} src='https://www.pikpng.com/pngl/b/71-715532_nsbm-green-university-logo-clipart.png' alt='logo' />
+                <ArrowBackIosIcon fontSize='large' onClick={()=>dispatch(closeDrawer())} style={{ marginLeft:20, color:'grey' }} />
                 <NavLink to='/' style={{ textDecorationLine: 'none' }} >
                     <ListItem button>
                         <ListItemIcon><IconButton><HomeIcon /></IconButton></ListItemIcon>
@@ -104,11 +96,7 @@ export default function TemporaryDrawer({ Icon, link, name }) {
 
     return (
         <React.Fragment>
-            <div
-                className={clsx(classes.list, classes.leftbar)}
-                onMouseOver={toggleDrawer('left', true)}
-            ></div>
-            <Drawer anchor='left' open={state['left']} onClose={toggleDrawer('left', false)}>
+            <Drawer anchor='left' open={isOpenDrawer} onClose={toggleDrawer('left', false)}>
                 {list('left')}
             </Drawer>
         </React.Fragment>

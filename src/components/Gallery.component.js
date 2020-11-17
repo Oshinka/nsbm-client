@@ -2,19 +2,17 @@ import React from 'react'
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import ImageGallery from 'react-image-gallery';
-import LeftBar from './LeftBar.component';
 import Data from '../data.json';
 import { useSelector } from 'react-redux';
 import './brightness.css';
 
 function Gallery() {
-    const isDark = useSelector(state => state.isDark)
+    const isDark = useSelector(state => state.isDark);
     
     return (
         <React.Fragment>
-            <LeftBar />
             <div className={`${isDark && 'darkMode'}`}>
-                <Container style={{ minHeight: '94vh' }}>
+                <Container>
                     <Typography variant="h2" style={{ color: 'grey' }} gutterBottom align='center'>
                         GALLERY
                         </Typography>

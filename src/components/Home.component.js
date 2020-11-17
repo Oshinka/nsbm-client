@@ -10,17 +10,14 @@ import CourseCard from './CardComponents/CourseCard.component';
 import IconButton from '@material-ui/core/IconButton';
 import { Button, Grid } from '@material-ui/core';
 import Youtube from 'react-youtube';
-import LeftBar from './LeftBar.component';
 import Tooltip from '@material-ui/core/Tooltip';
 import ImageGallery from 'react-image-gallery';
 import Contact from './Contact.component';
 import Data from '../data.json';
-import './home.component.css'
-import { useSelector } from 'react-redux';
+import './home.component.css';
 import './brightness.css';
 
 export default function Home() {
-    const isDark = useSelector(state => state.isDark)
 
     const [showTopButton, setShowTopButton] = useState(false);
 
@@ -92,59 +89,56 @@ export default function Home() {
                 autoPlay
                 showBullets
             />
-            <LeftBar />
-            <div className={`${isDark && 'darkMode'}`}>
-                <Container>
-                    <Grid className='section textColor'>
-                        <Typography variant="h2" gutterBottom align='center'>
-                            COURSES
+            <Container>
+                <Grid className='section textColor'>
+                    <Typography variant="h2" gutterBottom align='center'>
+                        COURSES
                         </Typography>
-                        <div className='courseCards cards'>
-                            {getCourseCards()}
-                        </div>
-                    </Grid>
-                    <Grid className='section textColor'>
-                        <Typography variant="h2" gutterBottom align='center'>
-                            STUDENT LIFE
-                        </Typography>
-                        <Grid container direction='row' justify='center'>
-                            <Youtube videoId='oKu4GAeGjp8' />
-                        </Grid>
-                    </Grid>
-                    <div className={`buttonTop ${showTopButton && 'buttonTopShow'}`}>
-                        <Tooltip title='Jump To Top' enterDelay={500} placement='bottom-end'>
-                            <IconButton color='primary'>
-                                <Button href='#top'>
-                                    <Fab color="primary" size="large" aria-label="scroll back to top">
-                                        <KeyboardArrowUpIcon
-                                            fontSize='large'
-                                        />
-                                    </Fab>
-                                </Button>
-                            </IconButton>
-                        </Tooltip>
+                    <div className='courseCards cards'>
+                        {getCourseCards()}
                     </div>
-                    <Grid className='section textColor'>
-                        <Typography variant="h2" gutterBottom align='center'>
-                            STUDENTS
+                </Grid>
+                <Grid className='section textColor'>
+                    <Typography variant="h2" gutterBottom align='center'>
+                        STUDENT LIFE
                         </Typography>
-                        <div className='studentCards cards'>
-                            {getStudentCards()}
-                        </div>
+                    <Grid container direction='row' justify='center'>
+                        <Youtube videoId='oKu4GAeGjp8' />
                     </Grid>
-                    <Grid className='section textColor'>
-                        <Typography variant="h2" gutterBottom align='center'>
-                            ACADEMIC STAFF
+                </Grid>
+                <div className={`buttonTop ${showTopButton && 'buttonTopShow'}`}>
+                    <Tooltip title='Jump To Top' enterDelay={500} placement='bottom-end'>
+                        <IconButton color='primary'>
+                            <Button href='#top'>
+                                <Fab color="primary" size="large" aria-label="scroll back to top">
+                                    <KeyboardArrowUpIcon
+                                        fontSize='large'
+                                    />
+                                </Fab>
+                            </Button>
+                        </IconButton>
+                    </Tooltip>
+                </div>
+                <Grid className='section textColor'>
+                    <Typography variant="h2" gutterBottom align='center'>
+                        STUDENTS
                         </Typography>
-                        <div className='lecturerCards cards'>
-                            {getLecturerCards()}
-                        </div>
-                    </Grid>
-                    <Grid className='section contact'>
-                        <Contact />
-                    </Grid>
-                </Container>
-            </div>
+                    <div className='studentCards cards'>
+                        {getStudentCards()}
+                    </div>
+                </Grid>
+                <Grid className='section textColor'>
+                    <Typography variant="h2" gutterBottom align='center'>
+                        ACADEMIC STAFF
+                        </Typography>
+                    <div className='lecturerCards cards'>
+                        {getLecturerCards()}
+                    </div>
+                </Grid>
+                <Grid className='section contact'>
+                    <Contact />
+                </Grid>
+            </Container>
         </React.Fragment>
     );
 

@@ -16,7 +16,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import axios from '../axios';
 import { AppBarContext } from './AppBarContext.component';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, logout, switchBrightness } from '../actions';
+import { login, logout, switchBrightness, openDrawer } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,7 +54,7 @@ export default function ButtonAppBar() {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const isDark = useSelector(state => state.isDark)
+    const isDark = useSelector(state => state.isDark);
 
     const [name, setName, avatar, setAvatar] = useContext(AppBarContext);
 
@@ -144,7 +144,7 @@ export default function ButtonAppBar() {
                     <Link to={'/'} className={classes.menuButton}>
                         <img className={classes.logo} src='https://www.nsbm.ac.lk/wp-content/uploads/2019/08/logo.png' alt='logo' />
                     </Link>
-                    <IconButton edge="start" className={classes.toggleButton} color="inherit" aria-label="menu">
+                    <IconButton onClick={() => dispatch(openDrawer())} edge="start" className={classes.toggleButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>

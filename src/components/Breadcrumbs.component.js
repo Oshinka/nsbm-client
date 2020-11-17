@@ -5,7 +5,7 @@ import {
     Link,
     Typography
 } from "@material-ui/core";
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import HomeIcon from '@material-ui/icons/Home';
 // import ViewQuiltIcon from '@material-ui/icons/ViewQuilt';
 // import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
@@ -30,7 +30,7 @@ const Breadcrumbs = props => {
     const pathnames = pathname.split("/").filter(x => x);
     return (
         <Grid container justify='flex-end'>
-            <MUIBreadcrumbs style={{ margin: '2vh 15vw' }} separator={<ArrowForwardIosIcon fontSize='small' />} aria-label="breadcrumb">
+            <MUIBreadcrumbs style={{ margin: '2vh 15vw' }} separator={<KeyboardArrowRightIcon />} aria-label="breadcrumb">
                 {pathnames.length > 0 ? (
                     <Link onClick={() => history.push("/")}>
                         <Grid container direction='row' alignItems='center'>

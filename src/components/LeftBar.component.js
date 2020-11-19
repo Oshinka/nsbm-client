@@ -96,7 +96,7 @@ export default function TemporaryDrawer({ Icon, link, name }) {
 
     return (
         <React.Fragment>
-            <Drawer anchor='left' open={isOpenDrawer} onClose={toggleDrawer('left', false)}>
+            <Drawer anchor='left' transitionDuration={500} open={isOpenDrawer} onClose={toggleDrawer('left', false)}>
                 {list('left')}
             </Drawer>
         </React.Fragment>

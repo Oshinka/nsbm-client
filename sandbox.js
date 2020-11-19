@@ -55,3 +55,10 @@ export default Projects
             return {
                 {/* Main code gose here */}
             }
+
+            
+            /* Loading button component */
+
+            <Button style={{ backgroundColor: 'blue' }} onClick={() => setLoading(true)}>
+            {(loading) ? <CircularProgress style={{ color: 'white' }} size={20} thickness={8} /> : 'UPLOAD'}
+        </Button>            

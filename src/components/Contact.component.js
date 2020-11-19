@@ -23,6 +23,7 @@ function Contact() {
     const [error, setError] = useState(false);
 
     const reset = () => {
+        console.log('reset method called');
         setName('');
         setEmail('');
         setMobile('');
@@ -53,11 +54,11 @@ function Contact() {
         emailjs.send('service_nsbm', 'template_contact_home', templateParams, 'user_IEVOpMbXgEGRrOezcMmfg')
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
-                reset();
                 setSuccess(true);
                 axios.post('/subscribers', templateParams)
-                    .then(res => {
-                        console.log(res.data);
+                .then(res => {
+                    console.log(res.data);
+                    reset();
                     })
             }, (error) => {
                 console.log('FAILED...', error);

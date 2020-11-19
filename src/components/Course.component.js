@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import TelegramIcon from '@material-ui/icons/Telegram';
+import Button from '@material-ui/core/Button';
 import Paypal from './Paypal.component';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
@@ -13,11 +15,13 @@ import './home.component.css'
 import 'fontsource-roboto';
 
 
-export default function Course({match}) {
-
+export default function Course({ match }) {
     const [enroll, setEnroll] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
 
-    const handleSuccess = (payment) => {
+    const handleSuccess = async (payment) => {
         console.log('From handleSuccess method', payment);
         console.log('From handleSuccess method', payment.paymentID);
 
@@ -28,7 +32,7 @@ export default function Course({match}) {
             paymentToken: payment.paymentToken
         };
 
-        axios.post('/payments', paymentDetails)
+        await axios.post('/payments', paymentDetails)
             .then(res => {
                 console.log(res.data);
                 Swal.fire({
@@ -40,8 +44,22 @@ export default function Course({match}) {
             })
 
         var templateParams = {
-            name: 'John'
+            name: name,
+            email: email,
+            course: stream.name,
+            paymentId: payment.paymentID
         };
+
+        const paymentDetailsForPDF = {
+            name: name,
+            amount: stream.priceInLKR,
+            paymentId: payment.paymentID
+        }
+
+        await axios.post('/receipt', paymentDetailsForPDF)
+            .then(res => {
+                console.log(res);
+            })
 
         emailjs.send('service_nsbm', 'template_receipt_payment', templateParams, 'user_IEVOpMbXgEGRrOezcMmfg')
             .then((response) => {
@@ -49,6 +67,8 @@ export default function Course({match}) {
             }, (error) => {
                 console.log('FAILED...', error);
             });
+
+        setSuccess(true);
     }
 
     const handleError = () => {
@@ -92,25 +112,58 @@ export default function Course({match}) {
                         {stream.description}
                     </Typography>
                 </Grid>
-                <Grid className='section'>
-                    <Fab
-                        onClick={() => { setEnroll(true) }}
-                        variant='extended'
-                        color='secondary'
-                        className={`${!enroll && 'enroll'}  ${enroll && 'activeEnroll'} `}
-                    >
-                        ENROLL TO THE COURSE <TelegramIcon style={{ marginLeft: 5 }} />
-                    </Fab>
+                <Grid className='section courseContact' container>
+                    <Grid container style={{ padding: '20px 20px 20px 60px' }}>
+                        <Fab
+                            onClick={() => { setEnroll(true) }}
+                            variant='extended'
+                            color='secondary'
+                            className={`${!enroll && 'enroll'}  ${enroll && 'activeEnroll'} `}
+                        >
+                            ENROLL TO THE COURSE <TelegramIcon style={{ marginLeft: 5 }} />
+                        </Fab>
+                    </Grid>
+                    {
+                        (enroll) ?
+                            <Grid container justify='center'>
+                                <Grid container direction='row' justify='space-evenly'>
+                                    <TextField
+                                        id="name"
+                                        label="Name"
+                                        variant="outlined"
+                                        onChange={(e) => setName(e.target.value)}
+                                        defaultValue={name}
+                                        className='contactForm'
+                                    />
+                                    <TextField
+                                        id="email"
+                                        label="Email"
+                                        variant="outlined"
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        defaultValue={email}
+                                        className='contactForm'
+                                    />
+                                </Grid>
+                                <Grid>
+                                    <Paypal
+                                        toPay={stream.priceInUSD}
+                                        onTransactionSuccess={handleSuccess}
+                                        onTransactionError={handleError()}
+                                        onTransactionCancel={handleCancel()}
+                                    />
+                                </Grid>
+                            </Grid>
+                            : ''
+                    }
                 </Grid>
                 {
-                    (enroll) ?
+                    (success) ?
                         <Grid className='section' container justify='center'>
-                            <Paypal
-                                toPay={stream.priceInUSD}
-                                onTransactionSuccess={handleSuccess}
-                                onTransactionError={handleError()}
-                                onTransactionCancel={handleCancel()}
-                            />
+                            <Button
+                                style={{ backgroundColor: 'green', color: 'white', fontWeight: 'bold' }}
+                                size='large'
+                                href='http://localhost:9000/receipt'
+                            >Download Receipt</Button>
                         </Grid>
                         : ''
                 }

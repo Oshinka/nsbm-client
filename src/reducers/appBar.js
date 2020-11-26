@@ -1,3 +1,5 @@
+import axios from '../axios';
+
 export const loginReducer = (state = false, action) => {
     switch (action.type) {
         case 'SIGN_IN':
@@ -24,6 +26,22 @@ export const drawerReducer = (state = false, action) => {
             return true;
         case 'CLOSE_DRAWER':
             return false;
+        default:
+            return state;
+    }
+}
+
+export const avatarReducer = (state = '', action) => {
+    switch (action.type) {
+        case 'SET_AVATAR':
+            axios.get('/students/me', { headers: { 'Authorization': localStorage.jwtToken } })
+                .then(response => {
+                    return response.data.avatar;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+            break;
         default:
             return state;
     }

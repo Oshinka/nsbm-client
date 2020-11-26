@@ -1,105 +1,99 @@
 .loadingIcon {
-    display: flex;
-    justify-content: center;
-    margin-top: 140px;
+  display: flex;
+  justify-content: center;
+  margin-top: 140px;
 }
 
 .buttonTop {
-    position: fixed;
-    top: 80%;
-    left: 85%;
-    border: 0;
-    z-index: -1;
-    display: none;
-    /* Animations */
-    transition-timing-function: ease-in;
-    transition: all 0.5s;
-
+  position: fixed;
+  bottom: 16vh;
+  right: 0;
+  border: 0;
+  z-index: -1;
+  display: none;
+  /* Animations */
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
 }
 
 .buttonTopShow {
-    display: unset !important;
-    z-index: 1;
-}
-
-.buttonTopShow:hover {
-    transition: transform 0.2s ease-in-out;
-    transform: scale(1.2) !important;
+  display: unset !important;
+  z-index: 1;
 }
 
 .textColor {
-    color: gray;
+  color: gray;
 }
 
 .section {
-    margin: 25px 0;
-    padding: 25px 0;
+  margin: 25px 0;
+  padding: 25px 0;
 }
 
 .courseCard {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .courseCard:hover {
-    opacity: 1;
-    transition: transform 0.3s ease-in-out;
-    transform: scale(1.02);
+  opacity: 1;
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1.02);
 }
 
 /* Course component */
 .enroll:hover {
-    transition: transform 0.3s ease-in-out;
-    transform: scale(1.1);
-    background-color: green !important;
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1.1);
+  background-color: green !important;
 }
 
-.activeEnroll{
-    background-color: blue !important;
+.activeEnroll {
+  background-color: blue !important;
 }
 
 .cards {
-    display: flex;
+  display: flex;
 }
 
 .courseCards {
-    justify-content: space-evenly;
+  justify-content: space-evenly;
 }
 
 .studentCards {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .lecturerCards {
-    overflow-y: hidden;
-    overflow-x: scroll;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
 
 .lecturerCards::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .contact {
-    background-color: #EBF5FB;
+  background-color: #ebf5fb;
 }
 
 .courseContact {
-    background-color: #D1F2EB;
+  background-color: #d1f2eb;
 }
 
 .contactForm {
-    max-width: 300px;
+  max-width: 300px;
 }
 
 .contactFormBtn {
-    margin: 20px 120px !important;
+  margin: 20px 120px !important;
 }
 
 .footer {
-    color: gray;
-    background-color: black;
-    padding: 5px 0;
+  color: gray;
+  background-color: black;
+  padding: 5px 0;
 }
 
 .footer > .MuiSvgIcon-root {
-    margin: 0 10px;
+  margin: 0 10px;
 }

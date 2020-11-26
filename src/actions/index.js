@@ -27,3 +27,9 @@ export const closeDrawer = () => {
         type: 'CLOSE_DRAWER'
     };
 };
+
+export const setReduxAvatar = () => {
+    return {
+        type: 'SET_AVATAR'
+    };
+};

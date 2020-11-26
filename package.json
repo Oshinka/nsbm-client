@@ -16,6 +16,7 @@
     "fontsource-roboto": "^3.0.3",
     "material-auto-rotating-carousel": "^3.0.2",
     "react": "^16.13.1",
+    "react-chatbot-kit": "^1.1.1",
     "react-dom": "^16.13.1",
     "react-image-gallery": "^1.0.8",
     "react-paypal-express-checkout": "^1.0.5",

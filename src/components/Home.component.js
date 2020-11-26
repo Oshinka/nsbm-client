@@ -9,9 +9,14 @@ import StudentCard from './CardComponents/StudentCard.component';
 import CourseCard from './CardComponents/CourseCard.component';
 import IconButton from '@material-ui/core/IconButton';
 import { Button, Grid } from '@material-ui/core';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import Youtube from 'react-youtube';
 import Tooltip from '@material-ui/core/Tooltip';
 import ImageGallery from 'react-image-gallery';
+import Chatbot from "react-chatbot-kit";
+import Config from './Chatbot/Config.component';
+import MessageParser from "./Chatbot/MessageParser.component";
+import ActionProvider from "./Chatbot/ActionProvider.component";
 import Contact from './Contact.component';
 import Data from '../data.json';
 import './home.component.css';
@@ -20,6 +25,7 @@ import './brightness.css';
 export default function Home() {
 
     const [showTopButton, setShowTopButton] = useState(false);
+    const [openChatbot, setOpenChatbot] = useState(false);
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -89,6 +95,21 @@ export default function Home() {
                 autoPlay
                 showBullets
             />
+            <IconButton onClick={() => setOpenChatbot(!openChatbot)} style={{ position:'fixed', bottom: '6vh', right: 0 }} >
+                <ChatBubbleIcon
+                    color='primary'
+                    style={{ fontSize: 72, color: '#3498DB' }}
+                    className='hvr-buzz-out'
+                />
+            </IconButton>
+            {
+                (openChatbot) ?
+                    <Chatbot
+                        config={Config}
+                        messageParser={MessageParser}
+                        actionProvider={ActionProvider}
+                    /> : ''
+            }
             <Container>
                 <Grid className='section textColor'>
                     <Typography variant="h2" gutterBottom align='center'>
@@ -110,9 +131,10 @@ export default function Home() {
                     <Tooltip title='Jump To Top' enterDelay={500} placement='bottom-end'>
                         <IconButton color='primary'>
                             <Button href='#top'>
-                                <Fab color="primary" size="large" aria-label="scroll back to top">
+                                <Fab className='hvr-grow' color="primary" size="large" aria-label="scroll back to top">
                                     <KeyboardArrowUpIcon
                                         fontSize='large'
+                                        className='hvr-grow'
                                     />
                                 </Fab>
                             </Button>

@@ -16,7 +16,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import axios from '../axios';
 import { AppBarContext } from './AppBarContext.component';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, logout, switchBrightness, openDrawer } from '../actions';
+import { login, logout, switchBrightness, openDrawer, setReduxAvatar } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -96,7 +96,7 @@ export default function ButtonAppBar() {
                 axios.get('/students/me', { headers: { 'Authorization': response.data.token } })
                     .then(response => {
                         setName(response.data.firstName);
-                        setAvatar(response.data.avatar);
+                        dispatch(setReduxAvatar());
                     })
                     .catch(function (error) {
                         console.log(error);

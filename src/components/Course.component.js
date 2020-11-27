@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import Button from '@material-ui/core/Button';
+import CropFreeIcon from '@material-ui/icons/CropFree';
 import Paypal from './Paypal.component';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
@@ -18,6 +19,7 @@ import 'fontsource-roboto';
 export default function Course({ match }) {
     const [enroll, setEnroll] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [qrCode, setQRCode] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
@@ -55,6 +57,11 @@ export default function Course({ match }) {
             amount: stream.priceInLKR,
             paymentId: payment.paymentID
         }
+
+        await axios.post('/qrcode', paymentDetailsForPDF)
+            .then(res => {
+                setQRCode(res.data)
+            })
 
         await axios.post('/receipt', paymentDetailsForPDF)
             .then(res => {
@@ -113,7 +120,7 @@ export default function Course({ match }) {
                     </Typography>
                 </Grid>
                 <Grid className='section courseContact' container>
-                    <Grid container style={{ padding: '20px 20px 20px 60px' }}>
+                    <Grid container style={{ padding: '20px 20px 60px 60px' }}>
                         <Fab
                             onClick={() => { setEnroll(true) }}
                             variant='extended'
@@ -144,7 +151,7 @@ export default function Course({ match }) {
                                         className='contactForm'
                                     />
                                 </Grid>
-                                <Grid>
+                                <Grid style={{ margin: 50 }}>
                                     <Paypal
                                         toPay={stream.priceInUSD}
                                         onTransactionSuccess={handleSuccess}
@@ -155,18 +162,37 @@ export default function Course({ match }) {
                             </Grid>
                             : ''
                     }
+                    {
+                        (success) ?
+                            <Grid container direction='row'>
+                                <Grid item xs={12} sm={6}>
+                                    <Typography variant='h5' align='center' gutterBottom>QR Code</Typography>
+                                    {
+                                        (qrCode) ?
+                                            <Grid container direction='column' alignItems='center' style={{ margin: '20px 0' }}>
+                                                <img src={qrCode} alt='qrcode' />
+                                            </Grid>
+                                            :
+                                            <Grid container direction='column' alignItems='center' style={{ margin: '20px 0' }}>
+                                                <CropFreeIcon style={{ fontSize: 76 }} />
+                                                <Typography variant='h6' color='textSecondary'>QR Code is not available</Typography>
+                                            </Grid>
+                                    }
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Typography variant='h5' align='center' gutterBottom>Payment Receipt</Typography>
+                                    <Grid container direction='column' alignItems='center'>
+                                        <Button
+                                            style={{ backgroundColor: 'green', color: 'white', fontWeight: 'bold', margin: 40, padding: '10px 15px' }}
+                                            size='large'
+                                            href='http://localhost:9000/receipt'
+                                        >Download</Button>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            : ''
+                    }
                 </Grid>
-                {
-                    (success) ?
-                        <Grid className='section' container justify='center'>
-                            <Button
-                                style={{ backgroundColor: 'green', color: 'white', fontWeight: 'bold' }}
-                                size='large'
-                                href='http://localhost:9000/receipt'
-                            >Download Receipt</Button>
-                        </Grid>
-                        : ''
-                }
             </Container>
         </React.Fragment>
     )

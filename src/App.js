@@ -3,24 +3,25 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { AppBarProvider } from './components/AppBarContext.component';
 import { useSelector } from 'react-redux';
+import { PageNotFound } from './components/PageNotFound/PageNotFound'
 
-import AppBar from './components/AppBar.component';
-import Breadcrumbs from './components/Breadcrumbs.component';
-import LeftBar from './components/LeftBar.component';
-import Home from './components/Home.component';
-import Gallery from './components/Gallery.component';
-import Course from './components/Course.component';
-import StudentList from './components/StudentList.component';
-import CreateStudent from './components/CreateStudent.component';
-import EditStudent from './components/EditStudent.component';
-import Student from './components/Student.component';
-import LecturerList from './components/LecturerList.component';
-import CreateLecturer from './components/CreateLecturer.component';
-import EditLecturer from './components/EditLecturer.component';
-import SubjectList from './components/SubjectList.component';
-import CreateSubject from './components/CreateSubject.component';
-import EditSubject from './components/EditSubject.component';
-import Footer from './components/Footer.component';
+import AppBar from './components/AppBar/AppBar';
+import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
+import LeftBar from './components/LeftBar/LeftBar';
+import Home from './components/Home/Home';
+import Gallery from './components/Gallery/Gallery';
+import Course from './components/Course/Course';
+import StudentList from './components/StudentList/StudentList';
+import CreateStudent from './components/CreateStudent/CreateStudent';
+import EditStudent from './components/EditStudent/EditStudent';
+import Student from './components/Student/Student';
+import LecturerList from './components/LecturerList/LecturerList';
+import CreateLecturer from './components/CreateLecture/CreateLecturer';
+import EditLecturer from './components/EditLecturer/EditLecturer';
+import SubjectList from './components/SubjectList/SubjectList';
+import CreateSubject from './components/CreateSubject/CreateSubject';
+import EditSubject from './components/EditSubject/EditSubject';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const isDark = useSelector(state => state.isDark);
@@ -31,7 +32,7 @@ function App() {
         <AppBarProvider>
           <AppBar />
         </AppBarProvider>
-        <div className={`appContent ${isDark && 'darkMode'}`}>
+        <div className={`appContent ${(isDark)? 'darkMode': 'lightMode'}`}>
           <Breadcrumbs />
           <LeftBar />
           <Route path='/' exact component={Home} />
@@ -47,6 +48,7 @@ function App() {
           <Route path='/subjects' exact component={SubjectList} />
           <Route path='/subjects/add-subject' exact component={CreateSubject} />
           <Route path='/subjects/edit/:id' exact component={EditSubject} />
+          <Route path='/404' exact component={PageNotFound} />
         </div>
         <Footer />
       </Router>

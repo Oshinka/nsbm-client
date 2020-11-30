@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Container from '@material-ui/core/Container';
-import LecturerCard from './CardComponents/LecturerCard.component';
-import StudentCard from './CardComponents/StudentCard.component';
-import CourseCard from './CardComponents/CourseCard.component';
+import LecturerCard from '../CardComponents/LecturerCard.component';
+import StudentCard from '../CardComponents/StudentCard.component';
+import CourseCard from '../CardComponents/CourseCard.component';
 import IconButton from '@material-ui/core/IconButton';
 import { Button, Grid } from '@material-ui/core';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
@@ -14,15 +15,15 @@ import Youtube from 'react-youtube';
 import Tooltip from '@material-ui/core/Tooltip';
 import ImageGallery from 'react-image-gallery';
 import Chatbot from "react-chatbot-kit";
-import Config from './Chatbot/Config.component';
-import MessageParser from "./Chatbot/MessageParser.component";
-import ActionProvider from "./Chatbot/ActionProvider.component";
-import Contact from './Contact.component';
-import Data from '../data.json';
-import './home.component.css';
-import './brightness.css';
+import Config from '../Chatbot/Config.component';
+import MessageParser from "../Chatbot/MessageParser.component";
+import ActionProvider from "../Chatbot/ActionProvider.component";
+import Contact from '../Contact/Contact';
+import Data from '../../data.json';
+import './home.css';
 
 export default function Home() {
+    const isDark = useSelector(state => state.isDark);
 
     const [showTopButton, setShowTopButton] = useState(false);
     const [openChatbot, setOpenChatbot] = useState(false);
@@ -129,7 +130,6 @@ export default function Home() {
                 </Grid>
                 <div className={`buttonTop ${showTopButton && 'buttonTopShow'}`}>
                     <Tooltip title='Jump To Top' enterDelay={500} placement='bottom-end'>
-                        <IconButton color='primary'>
                             <Button href='#top'>
                                 <Fab className='hvr-grow' color="primary" size="large" aria-label="scroll back to top">
                                     <KeyboardArrowUpIcon
@@ -138,7 +138,6 @@ export default function Home() {
                                     />
                                 </Fab>
                             </Button>
-                        </IconButton>
                     </Tooltip>
                 </div>
                 <Grid className='section textColor'>
@@ -157,9 +156,10 @@ export default function Home() {
                         {getLecturerCards()}
                     </div>
                 </Grid>
-                <Grid className='section contact'>
+                <Grid className={(isDark)?'contactDarkMode':'contact'} style={{ margin: '25px 25px 0 25px', padding: 25 }}>
                     <Contact />
                 </Grid>
+                <div style={{ minHeight: 50 }}></div>
             </Container>
         </React.Fragment>
     );

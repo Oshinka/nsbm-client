@@ -13,17 +13,17 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import axios from '../axios';
-import { AppBarContext } from './AppBarContext.component';
+import axios from '../../axios';
+import { AppBarContext } from '../AppBarContext.component';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, logout, switchBrightness, openDrawer, setReduxAvatar } from '../actions';
+import { login, logout, switchBrightness, openDrawer, setReduxAvatar } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
     toggleButton: {
-        marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(2),
     },
     title: {
         flexGrow: 1,
@@ -38,8 +38,6 @@ const useStyles = makeStyles((theme) => ({
     },
     logo: {
         height: 64,
-        marginLeft: 20,
-        marginRight: 80,
     },
     control: {
         margin: theme.spacing(2),
@@ -145,12 +143,15 @@ export default function ButtonAppBar() {
                         <img className={classes.logo} src='https://www.nsbm.ac.lk/wp-content/uploads/2019/08/logo.png' alt='logo' />
                     </Link>
                     <IconButton onClick={() => dispatch(openDrawer())} edge="start" className={classes.toggleButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
+                        <MenuIcon fontSize='large' />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
                         NSBM
                     </Typography>
-                    <IconButton onClick={() => dispatch(switchBrightness())}>
+                    <IconButton onClick={() => {
+                        dispatch(switchBrightness());
+                        localStorage.setItem('isDark', true);
+                    }}>
                         { (isDark) ? <Brightness4Icon className={classes.menuButton} /> : <BrightnessHighIcon className={classes.menuButton} /> }
                     </IconButton>
                     <Link to={'/gallery'} className={classes.menuButton}>

@@ -6,8 +6,8 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import emailjs from 'emailjs-com';
-import axios from '../axios';
-import './home.component.css';
+import axios from '../../axios';
+import './contact.css';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -65,6 +65,11 @@ function Contact() {
                 reset();
                 setError(true);
             });
+
+        axios.post('/sms', templateParams)
+        .then((response) => {
+            console.log(response.data);
+        })
 
         // reset();
     }

@@ -1,0 +1,22 @@
+.section {
+  margin: 25px 0;
+  padding: 25px 0;
+}
+
+.enroll:hover {
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1.1);
+  background-color: green !important;
+}
+
+.activeEnroll {
+  background-color: blue !important;
+}
+
+.courseContact {
+  background-color: #d1f2eb;
+}
+
+.contactForm {
+  max-width: 300px;
+}

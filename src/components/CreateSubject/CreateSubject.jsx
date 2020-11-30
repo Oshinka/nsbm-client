@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
-import axios from '../axios';
+import axios from '../../axios';
 
 class CreateSubject extends Component {
     constructor(props) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
-import axios from '../axios';
+import axios from '../../axios';
 
 class CreateLecturer extends Component {
     constructor(props) {

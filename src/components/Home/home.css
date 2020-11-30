@@ -7,7 +7,7 @@
 .buttonTop {
   position: fixed;
   bottom: 16vh;
-  right: 0;
+  right: 0.5vw;
   border: 0;
   z-index: -1;
   display: none;
@@ -40,17 +40,6 @@
   transform: scale(1.02);
 }
 
-/* Course component */
-.enroll:hover {
-  transition: transform 0.3s ease-in-out;
-  transform: scale(1.1);
-  background-color: green !important;
-}
-
-.activeEnroll {
-  background-color: blue !important;
-}
-
 .cards {
   display: flex;
 }
@@ -74,24 +63,12 @@
 
 .contact {
   background-color: #ebf5fb;
+  border-radius: 5%;
 }
 
-.courseContact {
-  background-color: #d1f2eb;
-}
-
-.contactForm {
-  max-width: 300px;
-}
-
-.contactFormBtn {
-  margin: 20px 120px !important;
-}
-
-.footer {
-  color: gray;
-  background-color: black;
-  padding: 5px 0;
+.contactDarkMode {
+  background-color: #154360;
+  border-radius: 5%;
 }
 
 .footer > .MuiSvgIcon-root {

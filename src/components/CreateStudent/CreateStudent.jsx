@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import StudentBasicInfo from './StudentForm/StudentBasicInfo.component';
 import Container from '@material-ui/core/Container';
-import Confirm from './StudentForm/Confirm.component';
-import Finalize from './StudentForm/Finalize.component';
+import StudentBasicInfo from '../StudentForm/StudentBasicInfo.component';
+import Finalize from '../StudentForm/Finalize.component';
+import Confirm from '../StudentForm/Confirm.component';
 import Typography from '@material-ui/core/Typography';
 import Swal from 'sweetalert2';
-import axios from '../axios';
+import axios from '../../axios';
 
 class CreateStudent extends Component {
     constructor(props) {

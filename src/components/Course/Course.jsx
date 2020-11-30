@@ -7,13 +7,13 @@ import Fab from '@material-ui/core/Fab';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import Button from '@material-ui/core/Button';
 import CropFreeIcon from '@material-ui/icons/CropFree';
-import Paypal from './Paypal.component';
+import Paypal from '../Paypal.component';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
-import Data from '../data.json';
-import axios from '../axios';
-import './home.component.css'
+import Data from '../../data.json';
+import axios from '../../axios';
 import 'fontsource-roboto';
+import './course.css';
 
 
 export default function Course({ match }) {

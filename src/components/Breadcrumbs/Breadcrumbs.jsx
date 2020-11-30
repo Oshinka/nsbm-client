@@ -20,7 +20,7 @@ import HomeIcon from '@material-ui/icons/Home';
 // import ListIcon from '@material-ui/icons/List';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from "react-router-dom";
-import Data from '../data.json';
+import Data from '../../data.json';
 
 const Breadcrumbs = props => {
     const {
@@ -30,7 +30,7 @@ const Breadcrumbs = props => {
     const pathnames = pathname.split("/").filter(x => x);
     return (
         <Grid container justify='flex-end'>
-            <MUIBreadcrumbs style={{ margin: '2vh 15vw' }} separator={<KeyboardArrowRightIcon />} aria-label="breadcrumb">
+            <MUIBreadcrumbs style={{ margin: '0vh 15vw' }} separator={<KeyboardArrowRightIcon />} aria-label="breadcrumb">
                 {pathnames.length > 0 ? (
                     <Link onClick={() => history.push("/")}>
                         <Grid container direction='row' alignItems='center'>

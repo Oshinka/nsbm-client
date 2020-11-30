@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
-import axios from '../axios';
+import axios from '../../axios';
 
-class EditLecturer extends Component {
+class EditStudent extends Component {
     constructor(props) {
         super(props);
 
@@ -19,7 +19,7 @@ class EditLecturer extends Component {
     }
 
     componentDidMount() {
-        axios.get('/lecturers/' + this.props.match.params.id)
+        axios.get('/students/' + this.props.match.params.id)
             .then(response => {
                 this.setState({
                     name: response.data.name,
@@ -53,7 +53,7 @@ class EditLecturer extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const lecturer = {
+        const student = {
             name: this.state.name,
             age: this.state.age,
             email: this.state.email
@@ -68,15 +68,15 @@ class EditLecturer extends Component {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                axios.patch('/lecturers/' + this.props.match.params.id, lecturer)
+                axios.patch('/students/' + this.props.match.params.id, student)
                     .then(res => console.log(res.data));
                 Swal.fire('Saved!', '', 'success').then((result) => {
-                    window.location = '/lecturers';
-                })
+                    window.location = '/students';
+                  })
             } else if (result.isDenied) {
                 Swal.fire('Changes are not saved', '', 'info').then((result) => {
-                    window.location = '/lecturers';
-                })
+                    window.location = '/students';
+                  })
             }
         })
     }
@@ -93,4 +93,4 @@ class EditLecturer extends Component {
     }
 }
 
-export default EditLecturer;
+export default EditStudent;

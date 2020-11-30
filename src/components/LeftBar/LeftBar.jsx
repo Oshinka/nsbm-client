@@ -13,9 +13,9 @@ import IconButton from '@material-ui/core/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SubjectIcon from '@material-ui/icons/Subject';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import MenuIcon from '@material-ui/icons/Menu';
 import { useSelector, useDispatch } from 'react-redux';
-import { closeDrawer } from '../actions';
+import { closeDrawer } from '../../actions';
 
 const useStyles = makeStyles({
     list: {
@@ -23,7 +23,6 @@ const useStyles = makeStyles({
     },
     logo: {
         height: 64,
-        marginLeft: 40,
         marginBottom: 10,
     },
     darkMode: {
@@ -53,8 +52,8 @@ export default function TemporaryDrawer({ Icon, link, name }) {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                <img className={classes.logo} src='https://www.pikpng.com/pngl/b/71-715532_nsbm-green-university-logo-clipart.png' alt='logo' />
-                <ArrowBackIosIcon fontSize='large' onClick={()=>dispatch(closeDrawer())} style={{ marginLeft:20, color:'grey' }} />
+                <img className={classes.logo} src='https://www.nsbm.ac.lk/wp-content/uploads/2019/08/logo.png' alt='logo' />
+                <MenuIcon fontSize='large' onClick={()=>dispatch(closeDrawer())} style={{ marginLeft:20, color:'grey' }} />
                 <NavLink to='/' style={{ textDecorationLine: 'none' }} >
                     <ListItem button>
                         <ListItemIcon><IconButton><HomeIcon /></IconButton></ListItemIcon>

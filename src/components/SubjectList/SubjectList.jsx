@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import LeftBar from './LeftBar.component';
+import LeftBar from '../LeftBar/LeftBar';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import Swal from 'sweetalert2';
 import Container from '@material-ui/core/Container';
-import axios from '../axios';
-import SearchBar from './SearchBar.component';
+import axios from '../../axios';
+import SearchBar from '../SearchBar.component';
 
 const Subject = props => (
     <tr>

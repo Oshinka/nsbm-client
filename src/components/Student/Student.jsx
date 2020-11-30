@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import classes from './UseStyles.component';
 import Button from '@material-ui/core/Button';
-import ImageAvatars from './ImageAvatars.component';
+import ImageAvatars from '../ImageAvatars.component';
 import Swal from 'sweetalert2';
-import axios from '../axios';
+import axios from '../../axios';
 
 class Student extends Component {
     constructor(props) {

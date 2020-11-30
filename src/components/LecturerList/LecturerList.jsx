@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import LeftBar from './LeftBar.component';
+import LeftBar from '../LeftBar/LeftBar';
 import Container from '@material-ui/core/Container';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PersonAddTwoToneIcon from '@material-ui/icons/PersonAddTwoTone';
 import Swal from 'sweetalert2';
-import axios from '../axios';
+import axios from '../../axios';
 
 const Lecturer = props => (
     <tr>

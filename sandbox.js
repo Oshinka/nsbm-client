@@ -61,4 +61,7 @@ export default Projects
 
             <Button style={{ backgroundColor: 'blue' }} onClick={() => setLoading(true)}>
             {(loading) ? <CircularProgress style={{ color: 'white' }} size={20} thickness={8} /> : 'UPLOAD'}
-        </Button>            
+        </Button>     
+        
+        
+        <img className={classes.logo} src='https://www.pikpng.com/pngl/b/71-715532_nsbm-green-university-logo-clipart.png' alt='logo' />

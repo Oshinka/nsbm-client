@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import { animateScroll as scroll } from 'react-scroll'
+import Aos from 'aos';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -20,6 +22,7 @@ import MessageParser from "../Chatbot/MessageParser.component";
 import ActionProvider from "../Chatbot/ActionProvider.component";
 import Contact from '../Contact/Contact';
 import Data from '../../data.json';
+import 'aos/dist/aos.css'
 import './home.css';
 
 export default function Home() {
@@ -29,6 +32,7 @@ export default function Home() {
     const [openChatbot, setOpenChatbot] = useState(false);
 
     useEffect(() => {
+        Aos.init({ duration: 3000 });
         window.addEventListener('scroll', () => {
             if (window.scrollY > 500) {
                 setShowTopButton(true);
@@ -84,18 +88,19 @@ export default function Home() {
 
     return (
         <React.Fragment>
-            <div id='top' />
-            <ImageGallery
-                items={Data.home.images}
-                showNav={false}
-                showFullscreenButton={false}
-                showPlayButton={false}
-                showThumbnails={false}
-                slideDuration={2000}
-                slideInterval={12000}
-                autoPlay
-                showBullets
-            />
+            <Grid data-aos='fade'>
+                <ImageGallery
+                    items={Data.home.images}
+                    showNav={false}
+                    showFullscreenButton={false}
+                    showPlayButton={false}
+                    showThumbnails={false}
+                    slideDuration={2000}
+                    slideInterval={12000}
+                    autoPlay
+                    showBullets
+                />
+            </Grid>
             <IconButton onClick={() => setOpenChatbot(!openChatbot)} style={{ position:'fixed', bottom: '6vh', right: 0 }} >
                 <ChatBubbleIcon
                     color='primary'
@@ -112,8 +117,8 @@ export default function Home() {
                     /> : ''
             }
             <Container>
-                <Grid className='section textColor'>
-                    <Typography variant="h2" gutterBottom align='center'>
+                <Grid data-aos='fade' className='section textColor'>
+                    <Typography className='hvr-underline-from-center' variant="h2" gutterBottom align='center'>
                         COURSES
                         </Typography>
                     <div className='courseCards cards'>
@@ -121,16 +126,16 @@ export default function Home() {
                     </div>
                 </Grid>
                 <Grid className='section textColor'>
-                    <Typography variant="h2" gutterBottom align='center'>
+                    <Typography className='hvr-underline-from-center' variant="h2" gutterBottom align='center'>
                         STUDENT LIFE
                         </Typography>
-                    <Grid container direction='row' justify='center'>
+                    <Grid data-aos='fade-up' container direction='row' justify='center'>
                         <Youtube videoId='oKu4GAeGjp8' />
                     </Grid>
                 </Grid>
                 <div className={`buttonTop ${showTopButton && 'buttonTopShow'}`}>
                     <Tooltip title='Jump To Top' enterDelay={500} placement='bottom-end'>
-                            <Button href='#top'>
+                            <Button onClick={()=>(scroll.scrollToTop())}>
                                 <Fab className='hvr-grow' color="primary" size="large" aria-label="scroll back to top">
                                     <KeyboardArrowUpIcon
                                         fontSize='large'
@@ -141,22 +146,22 @@ export default function Home() {
                     </Tooltip>
                 </div>
                 <Grid className='section textColor'>
-                    <Typography variant="h2" gutterBottom align='center'>
+                    <Typography className='hvr-underline-from-center' variant="h2" gutterBottom align='center'>
                         STUDENTS
                         </Typography>
-                    <div className='studentCards cards'>
+                    <div data-aos='fade-up' className='studentCards cards'>
                         {getStudentCards()}
                     </div>
                 </Grid>
                 <Grid className='section textColor'>
-                    <Typography variant="h2" gutterBottom align='center'>
+                    <Typography className='hvr-underline-from-center' variant="h2" gutterBottom align='center'>
                         ACADEMIC STAFF
                         </Typography>
-                    <div className='lecturerCards cards'>
+                    <div data-aos='fade-up' className='lecturerCards cards'>
                         {getLecturerCards()}
                     </div>
                 </Grid>
-                <Grid className={(isDark)?'contactDarkMode':'contact'} style={{ margin: '25px 25px 0 25px', padding: 25 }}>
+                <Grid data-aos='flip-right' className={(isDark)?'contactDarkMode':'contact'} style={{ margin: '25px 25px 0 25px', padding: 25 }}>
                     <Contact />
                 </Grid>
                 <div style={{ minHeight: 50 }}></div>

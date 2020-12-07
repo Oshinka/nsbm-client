@@ -53,7 +53,7 @@ export default function TemporaryDrawer({ Icon, link, name }) {
         >
             <List>
                 <img className={classes.logo} src='https://www.nsbm.ac.lk/wp-content/uploads/2019/08/logo.png' alt='logo' />
-                <MenuIcon fontSize='large' onClick={()=>dispatch(closeDrawer())} style={{ marginLeft:20, color:'grey' }} />
+                <MenuIcon fontSize='large' onClick={()=>dispatch(closeDrawer())} style={{ marginLeft:20, color:'grey', cursor:"pointer" }} />
                 <NavLink to='/' style={{ textDecorationLine: 'none' }} >
                     <ListItem button>
                         <ListItemIcon><IconButton><HomeIcon /></IconButton></ListItemIcon>
@@ -95,7 +95,7 @@ export default function TemporaryDrawer({ Icon, link, name }) {
 
     return (
         <React.Fragment>
-            <Drawer anchor='left' transitionDuration={500} open={isOpenDrawer} onClose={toggleDrawer('left', false)}>
+            <Drawer anchor='left' transitionDuration={1000} open={isOpenDrawer} onClose={toggleDrawer('left', false)}>
                 {list('left')}
             </Drawer>
         </React.Fragment>

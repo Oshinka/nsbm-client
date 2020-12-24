@@ -32,7 +32,7 @@ const Breadcrumbs = props => {
         <Grid container justify='flex-end'>
             <MUIBreadcrumbs style={{ margin: '0vh 15vw' }} separator={<KeyboardArrowRightIcon />} aria-label="breadcrumb">
                 {pathnames.length > 0 ? (
-                    <Link onClick={() => history.push("/")}>
+                    <Link style={{ cursor:'pointer' }} onClick={() => history.push("/")}>
                         <Grid container direction='row' alignItems='center'>
                             <HomeIcon style={{ marginRight: 5 }} />
                             <Typography variant='h6'>Home</Typography>
